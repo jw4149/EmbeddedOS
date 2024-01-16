@@ -1,0 +1,8 @@
+1. r0
+2. r2
+3. strb	r3, [r1]
+4. ldrb	r1, [r1]
+5. ldrh	r1, [r1]/strh	r3, [r1]
+6. ldr	r1, [r1]/str    r3, [r1]
+
+8. b	8 <foo+0x8>
