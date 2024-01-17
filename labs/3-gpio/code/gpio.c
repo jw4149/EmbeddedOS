@@ -31,6 +31,20 @@ void gpio_set_output(unsigned pin) {
 
   // implement this
   // use <gpio_fsel0>
+  unsigned reg_n = pin / 10;
+  unsigned sel_n = pin % 10;
+
+  unsigned *base_pointer = (void *)GPIO_BASE;
+  unsigned addr = (unsigned)(base_pointer + reg_n);
+
+  unsigned val = GET32(addr);
+
+  unsigned mask = 0x7 << sel_n;
+  unsigned shift = 3 * sel_n;
+
+  val &= ~mask;
+  val |= (1 << shift);
+  PUT32(addr, val);
 }
 
 // set GPIO <pin> on.
@@ -39,6 +53,7 @@ void gpio_set_on(unsigned pin) {
         return;
   // implement this
   // use <gpio_set0>
+  PUT32(gpio_set0, (1 << pin));
 }
 
 // set GPIO <pin> off
@@ -47,6 +62,7 @@ void gpio_set_off(unsigned pin) {
         return;
   // implement this
   // use <gpio_clr0>
+  PUT32(gpio_clr0, (1 << pin));
 }
 
 // set <pin> to <v> (v \in {0,1})
@@ -64,6 +80,18 @@ void gpio_write(unsigned pin, unsigned v) {
 // set <pin> to input.
 void gpio_set_input(unsigned pin) {
   // implement.
+  unsigned reg_n = pin / 10;
+  unsigned sel_n = pin % 10;
+
+  unsigned *base_pointer = (void *)GPIO_BASE;
+  unsigned addr = (unsigned)(base_pointer + reg_n);
+
+  unsigned val = GET32(addr);
+
+  unsigned mask = 0x7 << sel_n;
+  val &= ~mask;
+
+  PUT32(addr, val);
 }
 
 // return the value of <pin>
@@ -71,5 +99,7 @@ int gpio_read(unsigned pin) {
   unsigned v = 0;
 
   // implement.
+  unsigned val = GET32(gpio_lev0);
+  v = (val >> pin) & 0x1;
   return v;
 }
