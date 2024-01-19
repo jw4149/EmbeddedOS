@@ -15,7 +15,7 @@ endif
 DEPS := $(firstword $(MAKEFILE_LIST))
 
 # should probably let them override optimizations.
-CFLAGS += $(INC) -Og -Wall -Wno-unused-function -Wno-unused-variable -MMD -MP -DRPI_UNIX
+CFLAGS += $(INC) -g -Og -Wall -Wno-unused-function -Wno-unused-variable -MMD -MP -DRPI_UNIX
 
 ##################################################################
 # compute all the directories we get code from.

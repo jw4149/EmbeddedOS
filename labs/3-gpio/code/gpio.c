@@ -39,7 +39,7 @@ void gpio_set_output(unsigned pin) {
 
   unsigned val = GET32(addr);
 
-  unsigned mask = 0x7 << sel_n;
+  unsigned mask = 0x7 << (sel_n * 3);
   unsigned shift = 3 * sel_n;
 
   val &= ~mask;
@@ -88,7 +88,7 @@ void gpio_set_input(unsigned pin) {
 
   unsigned val = GET32(addr);
 
-  unsigned mask = 0x7 << sel_n;
+  unsigned mask = 0x7 << (sel_n * 3);
   val &= ~mask;
 
   PUT32(addr, val);

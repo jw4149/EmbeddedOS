@@ -18,7 +18,7 @@ TEST_SRC = 0-gpio-read.c
 # TEST_SRC := $(wildcard ./[0123]-*.c) $(wildcard ./prog-*.c) 
 
 # to run all the simple tests
-TEST_SRC := $(wildcard ./0-*.c)
+TEST_SRC := $(wildcard ./[123]-*.c)
 
 # the trace flags --- if you override notmain, would need to add it.
 WRAP = --wrap=PUT32 --wrap=GET32

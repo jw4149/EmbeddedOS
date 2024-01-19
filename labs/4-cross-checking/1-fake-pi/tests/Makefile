@@ -4,7 +4,7 @@
 #      - run a single test <0-gpio-write-17.c>:
 #           TEST_SRC := 0-gpio-write-17.c
 #      - run all tests with 0-* prefix:
-#           TEST_SRC := $(wildcard ./[0]-*.c)
+#           TEST_SRC := $(wildcard ./[0-1]-*.c)
 #      see more below.
 #   
 #  2. test commands (see bottom of Makefile and <Makefile.test>
@@ -36,7 +36,7 @@
 #   TEST_SRC += $(wildcard ./[1]-*.c)
 
 # 1. do a single 0-*.c test file since easy.
-TEST_SRC := 0-gpio-write-17.c
+# TEST_SRC := ./1-gpio-set-output.c
 
 # 2. do all the 0-* test files (uncomment)
 # TEST_SRC := $(wildcard ./[0]-*.c)
@@ -49,7 +49,11 @@ TEST_SRC := 0-gpio-write-17.c
 # TEST_SRC :=  $(wildcard ./act-*.c) 
 
 # 6. then do everything.
-# TEST_SRC := $(wildcard ./[0-5]-*.c) $(wildcard ./prog-*.c)  $(wildcard ./act-*.c) 
+TEST_SRC := $(wildcard ./[0-5]-*.c) $(wildcard ./prog-*.c)  $(wildcard ./act-*.c) 
+
+# TEST_SRC := $(wildcard ./prog-*.c)
+# TEST_SRC = $(wildcard ./[0]-*.c)
+# TEST_SRC = $(wildcard ./[1]-*.c)
 
 ###############################################################################
 
@@ -66,11 +70,11 @@ INC =  -I../  -I.
 INC +=  -I$(CS140E_2024_PATH)/libpi/include
 INC +=  -I$(CS140E_2024_PATH)/libpi/libc
 INC +=  -I$(CS140E_2024_PATH)/libpi/staff-src
-CFLAGS = $(INC) -O -Wall -Wno-unused-function -Wno-unused-variable
+CFLAGS = $(INC) -Og -Wall -Wno-unused-function -Wno-unused-variable
 
 DEPS = $(LIBPI_FAKE) $(FAKE_PROGS) 
 
-all: $(LIBPI_FAKE) $(FAKE_PROGS)  run
+all: $(LIBPI_FAKE) $(FAKE_PROGS)  #run
 
 # force checking libpi-fake.a
 $(LIBPI_FAKE): FORCE
@@ -100,7 +104,7 @@ checkoff: $(DEPS)
 	@echo -n "total files = ";
 	@ls $(TEST_OUT) | wc  -l
 	@echo -n "checksum of cksum command <ls TEST_OUT| sort -n | cksum> =\n   ";
-	@ls $(TEST_OUT) | sort -n | cksum 
+	@cksum $(TEST_OUT) | sort -n | cksum 
 
 cleanall: clean
 	rm -f *.out  *.raw
