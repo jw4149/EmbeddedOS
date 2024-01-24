@@ -65,6 +65,33 @@ _data_abort_asm:              .word data_abort_asm
 _interrupt_asm:               .word interrupt_asm
 _interrupt_table_end:
 
+.globl _usr_interrupt_table
+.globl _usr_interrupt_table_end
+_usr_interrupt_table:
+  ldr pc, _usr_reset_asm
+  ldr pc, _usr_undefined_instruction_asm
+  ldr pc, _usr_software_interrupt_asm
+  ldr pc, _usr_prefetch_abort_asm
+  ldr pc, _usr_data_abort_asm
+  ldr pc, _usr_reset_asm
+  ldr pc, _usr_interrupt_asm
+_usr_fast_interrupt_asm:
+  sub   lr, lr, #4 @First instr of FIQ handler
+  push  {lr}
+  push  {r0-r12}
+  mov   r0, lr              @ Pass old pc
+  bl    fast_interrupt_vector    @ C function
+  pop   {r0-r12}
+  ldm   sp!, {pc}^
+
+_usr_reset_asm:                   .word reset_asm
+_usr_undefined_instruction_asm:   .word undefined_instruction_asm
+_usr_software_interrupt_asm:      .word usr_software_interrupt_asm
+_usr_prefetch_abort_asm:          .word prefetch_abort_asm
+_usr_data_abort_asm:              .word data_abort_asm
+_usr_interrupt_asm:               .word interrupt_asm
+_usr_interrupt_table_end:
+
 @ only handler that should run since we only enable general interrupts
 interrupt_asm:
   mov sp, #INT_STACK_ADDR   @ i believe we have 512mb - 16mb, so this should be safe
@@ -95,8 +122,26 @@ software_interrupt_asm:
     @   - call
     @   - restore regs
     @   - return from the exception.
-    asm_not_implemented()
-    movs pc, lr
+
+    push  {r1, lr}
+    sub   lr, lr, #4
+    mov   r1, r0
+    mov   r0, lr
+    bl    syscall_vector
+    pop   {r1, lr}
+
+    movs  pc, lr
+
+usr_software_interrupt_asm:
+
+    push  {r1, lr}
+    sub   lr, lr, #4
+    mov   r1, r0
+    mov   r0, lr
+    bl    syscall_vector
+    pop   {r1, lr}
+
+    movs  pc, lr
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ we don't generate any of these, will just panic and halt.

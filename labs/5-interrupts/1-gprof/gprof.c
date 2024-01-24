@@ -26,21 +26,39 @@
 
 // allocate table.
 //    few lines of code
+static unsigned arr_size;
+static unsigned *arr;
+
 static unsigned gprof_init(void) {
-    unimplemented();
+    arr_size = __code_end__-__code_start__;
+    // printk("code start is %d, code end is %d, arr_size is %d", __code_start__, __code_end__, arr_size);
+    arr = kmalloc(sizeof(unsigned) * arr_size);
+    for (int i = 0; i < arr_size; i++) {
+        arr[i] = 0;
+    }
+    return 0;
 }
 
 // increment histogram associated w/ pc.
 //    few lines of code
 static void gprof_inc(unsigned pc) {
-    unimplemented();
+    unsigned index = (pc - (unsigned)__code_start__)/4;
+    arr[index]++;
 }
 
 // print out all samples whose count > min_val
 //
 // make sure sampling does not pick this code up!
 static void gprof_dump(unsigned min_val) {
-    unimplemented();
+    system_disable_interrupts();
+    for (int i = 0; i < arr_size; i++) {
+        unsigned count = arr[i];
+        if (count >= min_val) {
+            uint32_t *pc = __code_start__ + i;
+            printk("val at %x is %d\n", pc, count);
+        }
+    }
+    system_enable_interrupts();
 }
 
 

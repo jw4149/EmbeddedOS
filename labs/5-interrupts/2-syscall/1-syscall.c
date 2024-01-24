@@ -34,6 +34,12 @@ static inline uint32_t cpsr_get(void) {
     return cpsr;
 }
 
+static inline uint32_t spsr_get(void) {
+    uint32_t spsr;
+    asm volatile("mrs %0,spsr" : "=r"(spsr));
+    return spsr;
+}
+
 enum { N = 1024 * 64 };
 static uint64_t stack[N];
 
@@ -52,8 +58,9 @@ void user_fn(void) {
 
 
     // you should put the <cpsr> mode in <mode>
-    unsigned mode = 0;
-    todo("check that the current mode is USER_LEVEL");
+    uint32_t cpsr = cpsr_get();
+    unsigned mode = cpsr & 0x1F;
+    // todo("check that the current mode is USER_LEVEL");
 
 
     if(mode != USER_MODE)
@@ -76,8 +83,13 @@ void user_fn(void) {
 int syscall_vector(unsigned pc, uint32_t r0) {
     uint32_t inst, sys_num, mode;
 
-    todo("get <spsr> and check that mode bits = USER level\n");
+    // todo("get <spsr> and check that mode bits = USER level\n");
+    uint32_t spsr = spsr_get();
+    mode = spsr & 0x1F;
 
+    unsigned *pc_ptr = (unsigned *)pc;
+    inst = (uint32_t)(*pc_ptr);
+    sys_num = inst & 0xFFFFFF;
 
     // do not change this code!
     if(mode != USER_MODE)
@@ -100,7 +112,9 @@ int syscall_vector(unsigned pc, uint32_t r0) {
 }
 
 void notmain() {
-    todo("use int_init_vec to install vector with a different swi handler");
+    // todo("use int_init_vec to install vector with a different swi handler");
+    extern uint32_t _usr_interrupt_table[], _usr_interrupt_table_end[];
+    int_init_vec(_usr_interrupt_table, _usr_interrupt_table_end);
 
 #if 0
     // you'll have to define these two symbols: swi instructions
@@ -108,10 +122,10 @@ void notmain() {
     extern uint32_t _int_table_user[], _int_table_user_end[];
     int_init_vec(_int_table_user, _int_table_user_end);
 #endif
-    todo("define int_table_user interrupts-asm.S: should set stack pointer!");
+    // todo("define int_table_user interrupts-asm.S: should set stack pointer!");
 
-    todo("set <sp> to a reasonable stack address in <stack>");
-    uint64_t *sp = 0;
+    // todo("set <sp> to a reasonable stack address in <stack>");
+    uint64_t *sp = &stack[N];
 
     output("calling user_fn with stack=%p\n", sp);
     // will call user_fn with stack pointer <sp>
