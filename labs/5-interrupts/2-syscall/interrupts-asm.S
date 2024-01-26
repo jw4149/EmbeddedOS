@@ -133,7 +133,7 @@ software_interrupt_asm:
     movs  pc, lr
 
 usr_software_interrupt_asm:
-
+    mov sp, #INT_STACK_ADDR
     push  {r1, lr}
     sub   lr, lr, #4
     mov   r1, r0
