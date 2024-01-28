@@ -87,7 +87,7 @@ rpi_thread_t *rpi_cur_thread(void) {
 // create a new thread.
 rpi_thread_t *rpi_fork(void (*code)(void *arg), void *arg) {
 
-    redzone_check();
+    redzone_check(0);
 
     rpi_thread_t *t = th_alloc();
 
@@ -128,13 +128,22 @@ rpi_thread_t *rpi_fork(void (*code)(void *arg), void *arg) {
 //   - otherwise context switch to the new thread.
 //     make sure to set cur_thread correctly!
 void rpi_exit(int exitcode) {
-    redzone_check();
+    redzone_check(0);
 
     // when you switch back to the scheduler thread:
     //      th_trace("done running threads, back to scheduler\n");
     // todo("implement rpi_exit");
-    if (Q_empty(&runq))
-        rpi_cswitch(&cur_thread->saved_sp, scheduler_thread->saved_sp);
+
+    rpi_thread_t *old_thread = cur_thread;
+    cur_thread = Q_pop(&runq);
+    th_free(old_thread);
+
+    if (cur_thread != NULL) {
+        rpi_cswitch(&old_thread->saved_sp, cur_thread->saved_sp);
+    } else {
+        th_trace("done running threads, back to scheduler\n");
+        rpi_cswitch(&old_thread->saved_sp, scheduler_thread->saved_sp);
+    }
 
     // should never return.
     not_reached();
@@ -148,11 +157,19 @@ void rpi_exit(int exitcode) {
 //      * context switch to the new thread.
 //        make sure to set cur_thread correctly!
 void rpi_yield(void) {
-    redzone_check();
+    redzone_check(0);
     // if you switch, print the statement:
     //     th_trace("switching from tid=%d to tid=%d\n", old->tid, t->tid);
+    if (Q_empty(&runq))
+        return;
+    
+    rpi_thread_t *old_thread = cur_thread;
+    Q_append(&runq, cur_thread);
 
-    todo("implement the rest of rpi_yield");
+    cur_thread = Q_pop(&runq);
+    th_trace("switching from tid=%d to tid=%d\n", old_thread->tid, cur_thread->tid);
+    rpi_cswitch(&old_thread->saved_sp, cur_thread->saved_sp);
+
 }
 
 /*

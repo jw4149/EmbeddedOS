@@ -7,8 +7,24 @@
 //     compiler didn't optimize the calls away.
 #include "rpi.h"
 
+void func2(int *addr_b) {
+    int b = 0;
+    *addr_b = (int)&b;
+}
+
+void func1(int *addr_a, int *addr_b) {
+    int a = 0;
+    *addr_a = (int)&a;
+    func2(addr_b);
+}
+
 int stack_grows_down(void) {
-    todo("implement this routine\n");
+    int addr_a, addr_b;
+    func1(&addr_a, &addr_b);
+    if (addr_b < addr_a) {
+        return 1;
+    }
+    return 0;
 }
 
 void notmain(void) {

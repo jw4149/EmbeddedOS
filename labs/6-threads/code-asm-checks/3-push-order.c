@@ -26,7 +26,7 @@ void notmain() {
     } else if(v[1] == val2 && v[0] == val1) {
         assert(v[3] == 4);
         assert(v[2] == 3);
-        todo("what does this imply?\n");
+        trace("Smaller value on lower address.\n");
     } else 
         panic("unexpected result\n");
 }
