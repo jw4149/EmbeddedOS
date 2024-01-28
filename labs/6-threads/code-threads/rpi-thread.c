@@ -86,10 +86,13 @@ rpi_thread_t *rpi_cur_thread(void) {
 
 // create a new thread.
 rpi_thread_t *rpi_fork(void (*code)(void *arg), void *arg) {
-    redzone_check(0);
+
+    redzone_check();
+
     rpi_thread_t *t = th_alloc();
 
     // write this so that it calls code,arg.
+    // void rpi_init_trampoline(void);
     void rpi_init_trampoline(void);
 
     /*
@@ -102,7 +105,15 @@ rpi_thread_t *rpi_fork(void (*code)(void *arg), void *arg) {
      *  3. store the address of rpi_init_trampoline into the lr
      *     position so context switching will jump there.
      */
-    todo("initialize thread stack");
+    // todo("initialize thread stack");
+    t->fn = code;
+    t->arg = arg;
+    
+    unsigned start = THREAD_MAXSTACK - 20;
+    t->stack[start+LR_OFFSET] = (uint32_t)rpi_init_trampoline;
+    t->stack[start+R4_OFFSET] = (uint32_t)code;
+    t->stack[start+R5_OFFSET] = (uint32_t)arg;
+    t->saved_sp = &(t->stack[start]);
 
     th_trace("rpi_fork: tid=%d, code=[%p], arg=[%x], saved_sp=[%p]\n",
             t->tid, code, arg, t->saved_sp);
@@ -117,11 +128,13 @@ rpi_thread_t *rpi_fork(void (*code)(void *arg), void *arg) {
 //   - otherwise context switch to the new thread.
 //     make sure to set cur_thread correctly!
 void rpi_exit(int exitcode) {
-    redzone_check(0);
+    redzone_check();
 
     // when you switch back to the scheduler thread:
     //      th_trace("done running threads, back to scheduler\n");
-    todo("implement rpi_exit");
+    // todo("implement rpi_exit");
+    if (Q_empty(&runq))
+        rpi_cswitch(&cur_thread->saved_sp, scheduler_thread->saved_sp);
 
     // should never return.
     not_reached();
@@ -135,7 +148,7 @@ void rpi_exit(int exitcode) {
 //      * context switch to the new thread.
 //        make sure to set cur_thread correctly!
 void rpi_yield(void) {
-    redzone_check(0);
+    redzone_check();
     // if you switch, print the statement:
     //     th_trace("switching from tid=%d to tid=%d\n", old->tid, t->tid);
 
@@ -161,7 +174,19 @@ void rpi_thread_start(void) {
     if(!scheduler_thread)
         scheduler_thread = th_alloc();
 
-    todo("implement the rest of rpi_thread_start");
+    // todo("implement the rest of rpi_thread_start");
+
+    /*
+    while (!Q_empty(&runq)) {
+        rpi_thread_t *t = Q_pop(&runq);
+        // cur_thread = t;
+        rpi_cswitch(&scheduler_thread->saved_sp, t->saved_sp);
+    }
+    */
+    cur_thread = Q_pop(&runq);
+    rpi_cswitch(&scheduler_thread->saved_sp, cur_thread->saved_sp);
+    
+    goto end;
 
 end:
     redzone_check();
