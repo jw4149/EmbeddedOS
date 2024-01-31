@@ -166,23 +166,35 @@ void simple_boot(int fd, uint32_t boot_addr, const uint8_t *buf, unsigned n) {
     while((op = get_op(fd)) != GET_PROG_INFO) {
         output("expected initial GET_PROG_INFO, got <%x>: discarding.\n", op);
         // have to remove just one byte since if not aligned, stays not aligned
-        get_uint8(fd);
+        trace_get8(fd);
     } 
 
     // 1. reply to the GET_PROG_INFO
-    todo("reply to GET_PROG_INFO");
+    trace_put32(fd, PUT_PROG_INFO);
+    trace_put32(fd, ARMBASE);
+    trace_put32(fd, n);
+    trace_put32(fd, crc32(buf,n));
 
     // 2. drain any extra GET_PROG_INFOS
-    todo("drain any extra GET_PROG_INFOS");
+    while ((op = get_op(fd)) == GET_PROG_INFO) {
+
+    }
 
     // 3. check that we received a GET_CODE
-    todo("check that we received a GET_CODE");
+    assert(op == GET_CODE);
+    uint32_t crc = trace_get32(fd);
+    assert(crc == crc32(buf,n));
 
     // 4. handle it: send a PUT_CODE + the code.
-    todo("send PUT_CODE + the code in <buf>");
+    trace_put32(fd, PUT_CODE);
+    for (int i = 0; i < n; i++) {
+        trace_put8(fd, buf[i]);
+
+    }
 
     // 5. Wait for BOOT_SUCCESS
-    todo("wait for BOOT_SUCCESS");
+    op = get_op(fd);
+    assert(op == BOOT_SUCCESS);
 
     boot_output("bootloader: Done.\n");
 }

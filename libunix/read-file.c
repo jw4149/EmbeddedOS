@@ -2,6 +2,8 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "libunix.h"
 
@@ -27,5 +29,33 @@ void *read_file(unsigned *size, const char *name) {
     //    - fclose() the file descriptor
     //    - make sure any padding bytes have zeros.
     //    - return it.   
-    unimplemented();
+    struct stat sb;
+
+    int fd = open(name, O_RDONLY);
+
+    int ret = stat(name, &sb);
+    if (ret != 0) {
+        close(fd);
+        return NULL;
+    }
+    
+    *size = sb.st_size;
+
+    unsigned buf_size = sb.st_size/4;
+
+    if (sb.st_size % 4 != 0)
+        buf_size += 1;
+
+    int *buf = malloc(buf_size * sizeof(int));
+    memset(buf, 0, buf_size * sizeof(int));
+
+    if (*size == 0) {
+        close(fd);
+        return buf;
+    }
+
+    read_exact(fd, buf, *size);
+    close(fd);
+
+    return buf;
 }
