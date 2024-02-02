@@ -3,13 +3,14 @@
 
 # swap these if your bootloader doesn't work.
 BOOTLOADER = my-install
-BOOTLOADER = pi-install
+# BOOTLOADER = pi-install
 
 # set to 1 if you want to run.
 RUN=0
 
 # we use a custom cstart
-COMMON_SRC := cstart.c uart.c
+# COMMON_SRC := cstart.c uart.c
+COMMON_SRC := cstart.c
 
 PROGS = output-test-0-hello.c  
 PROGS += output-test-1-hello-disable.c  

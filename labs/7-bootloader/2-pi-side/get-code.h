@@ -217,7 +217,7 @@ uint32_t get_code(void) {
     }
 
     // 7. send back a BOOT_SUCCESS!
-    boot_putk("Jiayang: success: Received the program!");
+    boot_putk("UART - Jiayang");
     // boot_todo("fill in your name above");
 
     // woo!

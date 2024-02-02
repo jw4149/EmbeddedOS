@@ -1,0 +1,7 @@
+opened tty port </dev/cu.usbserial-120>.
+pi-install: tty-usb=</dev/cu.usbserial-120> program=<./main.bin> about to boot
+TRACE:simple_boot: sending 2069420 bytes, crc32=cc9a4d0a
+waiting for a start
+GET_CODE op mismatch: expected 55556666, got bbbbcccc
+ffUU
+MšÌ
