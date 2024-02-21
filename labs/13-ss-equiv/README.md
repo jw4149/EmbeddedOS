@@ -1,8 +1,23 @@
 ## Single step equivalance checking
 
+
 <p align="center">
   <img src="images/pi-ss-equiv.jpg" width="700" />
 </p>
+
+***NOTE***:
+  - You can set the `cpsr` mode using a register e.g., r0 via the
+    `msr` assembly instruction with the `_c` modifier:
+
+            msr cpsr_c, r0
+ 
+    You can see an example of where we use `msr` in `libpi/staff-start.S`
+
+  - `prefetch_flush(r)` expects a register `r` it can trash.  Usually you
+     want a caller-saved that isn't in use.***
+
+  - For part 0: you can assume `mode_get_lr_sp_asm` is *not* called
+    for USER mode.  We'll have a seperate routine for that.  
 
 Initially we were going to do today's lab in one shot, but we'll split
 it across two labs so that:
@@ -152,6 +167,26 @@ you're coming from and going to privileged (not user mode).  You should
 make copies of the tests above (with appropriate renaming) and modify
 them to go between some non-user mode (presumably not `SUPER` or `SYS`).
 You already have the pieces for this so it's mainly a re-enforcement.
+
+A couple of notes:
+  1. The challenge here is that the caret operator `^` *only* loads
+     or stores to user mode registers, not to any other (privileged)
+     mode, so won't help us here.  So, since you don't have caret,
+     what do you do?   The good thing is that `0-user-sp-lr-asm.S`
+     has most of the pieces already so you can just use those.
+
+  2. In some sense it is easier to save and restore state between
+     privileged modes versus user mode since we can switch back and
+     forth however we want, whereas once we go to user mode we need a
+     system call to get back.  
+
+  3. Probably the easiest approach to restore the privileged registers
+     is to (1) do a full `msr` switch to the right mode (as in
+     `libpi/staff-start.S`) and then (2) do a `ldm` of all the registers.
+
+  4. Also, and this is my fault: your privileged mode save and restore
+     should work for any privileged mode, not just a specific hardcoded
+     one.  So you should use `msr` not `cps`.
 
 -----------------------------------------------------------------------
 ### Check off your final project and spec out parts, todo.
