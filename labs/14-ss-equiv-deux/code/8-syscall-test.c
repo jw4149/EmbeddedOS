@@ -74,6 +74,7 @@ void notmain(void) {
         .regs[REGS_CPSR] = cpsr             // the cpsr to use.
     };
     
+    // trace("About to enter cswitch\n");
     switchto_cswitch(&start_regs, &r);
     trace("done!\n");
 }

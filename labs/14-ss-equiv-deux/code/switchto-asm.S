@@ -58,7 +58,7 @@ MK_FN(switchto_priv_asm)
 @ and call the right switchto on <next>
 MK_FN(cswitchto_priv_asm)
     @ initially just forward to ours.
-    b staff_cswitchto_priv_asm
+    @ b staff_cswitchto_priv_asm
 
     @ to implement:
     @ 1. save all the callee regs (just like in your threads library)
@@ -69,7 +69,23 @@ MK_FN(cswitchto_priv_asm)
     @       str r5,  [r0, #(5*4)]  @ r5
     @       ... etc ...
     @   don't forget the cpsr!
+    str r4, [r0, #(4*4)]
+    str r5, [r0, #(5*4)]
+    str r6, [r0, #(6*4)]
+    str r7, [r0, #(7*4)]
+    str r8, [r0, #(8*4)]
+    str r9, [r0, #(9*4)]
+    str r10, [r0, #(10*4)]
+    str r11, [r0, #(11*4)]
 
+    str sp, [r0, #(13*4)]
+    str lr, [r0, #(14*4)]
+    str lr, [r0, #(15*4)]
+
+    mrs r12, cpsr
+    str r12, [r0, #(16*4)]
+
+    mov r0, r1
 
     @ 2. just call the right switch routine: note, we should
     @    *not* reach this location when switching back!
@@ -85,8 +101,25 @@ MK_FN(cswitchto_priv_asm)
 @ and call the right switchto on <next>
 MK_FN(cswitchto_user_asm)
     @ initially just forward to ours.
-    b staff_cswitchto_priv_asm
+    @ b staff_cswitchto_priv_asm
 
-    asm_todo("save the registers: identical to <switchto_priv_asm>")
+    @ asm_todo("save the registers: identical to <switchto_priv_asm>")
+    str r4, [r0, #(4*4)]
+    str r5, [r0, #(5*4)]
+    str r6, [r0, #(6*4)]
+    str r7, [r0, #(7*4)]
+    str r8, [r0, #(8*4)]
+    str r9, [r0, #(9*4)]
+    str r10, [r0, #(10*4)]
+    str r11, [r0, #(11*4)]
+
+    str sp, [r0, #(13*4)]
+    str lr, [r0, #(14*4)]
+    str lr, [r0, #(15*4)]
+
+    mrs r12, cpsr
+    str r12, [r0, #(16*4)]
+
+    mov r0, r1
     bl switchto_user_asm
     asm_not_reached();

@@ -7,9 +7,11 @@ COMMON_SRC += switchto-asm.S
 # new
 COMMON_SRC += full-except-asm.S
 
+COMMON_SRC += equiv-threads.c
+
 # you'll be replacing these.
-STAFF_OBJS := staff-full-except-asm.o  
-STAFF_OBJS += staff-switchto-asm.o
+#STAFF_OBJS := staff-full-except-asm.o  
+#STAFF_OBJS += staff-switchto-asm.o
 
 # define this if you need to give the device for your pi
 TTYUSB = 
@@ -21,7 +23,8 @@ RUN=1
 START_ASM = staff-start.S
 
 # new test 8
-PROGS := $(wildcard ./[125678]-*.c)
+#PROGS := $(wildcard ./[125678]-*.c)
+PROGS := 10-equiv-test.c
 #PROGS := $(wildcard ./[8]-*.c)
 
 GREP_STR := 'TRACE:\|THREAD:\|ERROR:\|PANIC:' 

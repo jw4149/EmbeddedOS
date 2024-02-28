@@ -66,7 +66,12 @@ int i2c_read(unsigned addr, uint8_t data[], unsigned nbytes) {
 }
 
 void i2c_init(void) {
-    todo("setup GPIO, setup i2c, sanity check results");
+    // todo("setup GPIO, setup i2c, sanity check results");
+	dev_barrier();
+	PUT32(&i2c->control, 1 << 15);
+	dev_barrier();
+	PUT32(&i2c->status, 0b10);
+	dev_barrier();
 }
 
 // shortest will be 130 for i2c accel.

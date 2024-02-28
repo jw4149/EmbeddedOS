@@ -14,7 +14,7 @@ static cq_t uartQ;
 
 enum { out_pin = 21, in_pin = 20 };
 static volatile unsigned n_rising_edge, n_falling_edge;
-
+static volatile unsigned prev_cycle_cnt;
 
 // client has to define this.
 void interrupt_vector(unsigned pc) {
@@ -29,7 +29,17 @@ void interrupt_vector(unsigned pc) {
     unsigned s = cycle_cnt_read();
 
     dev_barrier();
-    unimplemented();
+    // unimplemented();
+    unsigned cycles = s - prev_cycle_cnt;
+    prev_cycle_cnt = s;
+
+    cq_push32(&uartQ, cycles);
+
+    int pin_val = gpio_read(in_pin);
+    cq_push32(&uartQ, 1-pin_val);
+
+    gpio_event_clear(in_pin);
+
     dev_barrier();
 }
 
@@ -37,6 +47,7 @@ void notmain() {
     cq_init(&uartQ,1);
     int_init();
     caches_enable();
+    cycle_cnt_init();
 
     // use pin 20 for tx, 21 for rx
     sw_uart_t u = sw_uart_init(out_pin,in_pin, 115200);
@@ -56,6 +67,7 @@ void notmain() {
     // this will cause transitions every time, so you can compare times.
     for(int l = 0; l < 2; l++) {
         unsigned b = 0b01010101;
+        prev_cycle_cnt = cycle_cnt_read();
         sw_uart_put8(&u, b);
         delay_ms(100);
         printk("nevent=%d\n", cq_nelem(&uartQ)/8);

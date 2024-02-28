@@ -22,7 +22,7 @@ static void *watchpt_data = 0;
 
 // is it a load fault?
 static int mini_watch_load_fault(void) {
-    todo("implement");
+    return datafault_from_ld();
 }
 
 // if we have a dataabort fault, call the watchpoint
@@ -38,8 +38,21 @@ static void watchpt_fault(regs_t *r) {
 
     watch_fault_t w = {0};
 
-    todo("setup the <watch_fault_t> structure");
-    todo("call: watchpt_handler(watchpt_data, &w);");
+    // todo("setup the <watch_fault_t> structure");
+    // 13-21
+    unsigned wcr = cp14_wcr0_get();
+    unsigned val = (wcr >> 5) & 0xF;
+    unsigned shift = 0;
+    while ((val & 0x1) != 1) {
+        shift += 1;
+        val = val >> 1;
+    }
+
+    unsigned wvr = cp14_wvr0_get();
+    unsigned addr = wvr + shift;
+
+    w = watch_fault_mk(watchpt_fault_pc(), (void *)addr, mini_watch_load_fault(), r);
+    watchpt_handler(watchpt_data, &w);
 
     // in case they change the regs.
     switchto(w.regs);
@@ -51,7 +64,11 @@ static void watchpt_fault(regs_t *r) {
 //   - setup the watchpoint handler
 // (see: <1-watchpt-test.c>
 void mini_watch_init(watch_handler_t h, void *data) {
-    todo("setup cp14 and the full exception routines");
+    // todo("setup cp14 and the full exception routines");
+    full_except_install(0);
+    full_except_set_data_abort(watchpt_fault);
+
+    cp14_enable();
 
     // just started, should not be enabled.
     assert(!cp14_bcr0_is_enabled());
@@ -63,22 +80,42 @@ void mini_watch_init(watch_handler_t h, void *data) {
 
 // set a watch-point on <addr>.
 void mini_watch_addr(void *addr) {
-    todo("watch <addr>");
+    uint32_t b = cp14_wcr0_get();
+    uint32_t mask = 1 << 20;
+    b &= ~mask;
+    b |= 0x1;
+    mask = 0b1111 << 5;
+    b &= ~mask;
+    unsigned shift = ((unsigned)addr % 4) + 5;
+    b |= (1 << shift);
+    // b |= (1 << 5);
+    b |= (0b11 << 3);
+    mask = 0b11 << 14;
+    b &= ~mask;
+    b |= 0b11 << 1;
+
+    if(!b)
+        panic("set b to the right bits for wcr0\n");
+
+    cp14_wcr0_set(b);
+    cp14_wvr0_set((unsigned)addr);
     assert(cp14_wcr0_is_enabled());
 }
 
 // disable current watchpoint <addr>
 void mini_watch_disable(void *addr) {
-    todo("implement");
+    // todo("implement");
+    cp14_wcr0_disable();
 }
 
 // return 1 if enabled.
 int mini_watch_enabled(void) {
-    todo("implement");
+    // todo("implement");
+    return cp14_wcr0_is_enabled();
 }
 
 // called from exception handler: if the current 
 // fault is a watchpoint, return 1
 int mini_watch_is_fault(void) { 
-    todo("implement");
+    return was_watchpt_fault();
 }
