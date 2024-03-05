@@ -1,0 +1,47 @@
+DEBUG:done with options: dev name=</dev/cu.usbserial-120>, pi-prog=<./tests/test-exception.bin>, trace=0
+opened tty port </dev/cu.usbserial-120>.
+DEBUG:my-install: tty-usb=</dev/cu.usbserial-120> program=<./tests/test-exception.bin>: about to boot
+TRACE:simple_boot: sending 16860 bytes, crc32=d8c4e911
+BOOT:waiting for a start
+expected initial GET_PROG_INFO, got <112222fe>: discarding.
+DEBUG:PRINT_STRING:pi sent print: <UART - Jiayang>
+BOOT:bootloader: Done.
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x20000000->0x20000000
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x20100000->0x20100000
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x20200000->0x20200000
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x0->0x0
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x7f00000->0x7f00000
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x8f00000->0x8f00000
+pinned-vm.c:pin_mmu_sec:97:DEBUG:about to map 0x100000->0x100000
+TRACE:notmain:about to enable
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=0
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=1
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=2
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=3
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=4
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=5
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=6
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=7
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=8
+TRACE:notmain:MMU is off!
+TRACE:notmain:MMU ON: hello from virtual memory!  cnt=9
+TRACE:notmain:MMU is off!
+TRACE:notmain:we wrote without vm: got 0xdeadbeef
+TRACE:fault_handler:SUCCESS!: got a fault on address=0x100000
+TRACE:fault_handler:dfsr is: 0x829
+TRACE:fault_handler:SUCCESS!: got a fault on address=0x100000
+TRACE:fault_handler:dfsr is: 0x29
+TRACE:branch_fault_handler:SUCCESS!: got a fault on address=0x100000
+TRACE:branch_fault_handler:dfsr is: 0x29
+TRACE:branch_fault_handler:all done: going to reboot
+DONE!!!
+
+bootloader: pi exited.  cleaning up

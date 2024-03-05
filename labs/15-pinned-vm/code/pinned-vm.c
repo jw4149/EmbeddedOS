@@ -72,7 +72,7 @@ int tlb_contains_va(uint32_t *result, uint32_t va) {
     uint32_t pa_ent = xlate_pa_get();
     uint32_t pa = pa_ent & ~(0x3FF);
     *result = pa | (va & 0x3FF);
-    return (pa_ent & 0x1) == 0x0;
+    return !(pa_ent & 0x1);
     // return staff_tlb_contains_va(result, va);
 }
 
