@@ -5,7 +5,7 @@
 
 // turn this off if you don't want all the debug output.
 enum { verbose_p = 1 };
-enum { OneMB = 1024*1024 };
+enum { SixteenMB = 1024*1024*16 };
 
 vm_pt_t *vm_pt_alloc(unsigned n) {
     demand(n == 4096, we only handling a fully-populated page table right now);
@@ -63,35 +63,39 @@ void vm_mmu_init(uint32_t domain_reg) {
 vm_pte_t *
 vm_map_sec(vm_pt_t *pt, uint32_t va, uint32_t pa, pin_t attr) 
 {
-    assert(aligned(va, OneMB));
-    assert(aligned(pa, OneMB));
+    assert(aligned(va, SixteenMB));
+    assert(aligned(pa, SixteenMB));
 
     // today we just use 1mb.
-    assert(attr.pagesize == PAGE_1MB);
+    trace("pagesize is: %d\n", attr.pagesize);
+    assert(attr.pagesize == PAGE_16MB);  
 
-    unsigned index = va >> 20;
-    assert(index < PT_LEVEL1_N);
+    unsigned start_index = va >> 20;
+    for (int i = 0; i < 16; i++) {
+        unsigned index = start_index + i;
+        assert(index < PT_LEVEL1_N);
 
-    vm_pte_t *pte = &pt[index];
-    // return staff_vm_map_sec(pt,va,pa,attr);
-    pte->tag = 0b10;
-    pte->B = attr.mem_attr & 0x1;
-    pte->C = (attr.mem_attr >> 1) & 0x1;
-    pte->XN = 0b0;
-    pte->domain = attr.dom;
-    pte->IMP = 0b0;
-    pte->AP = attr.AP_perm & 0x11;
-    pte->TEX = attr.mem_attr >> 2;
-    pte->APX = attr.AP_perm >> 2;
-    pte->S = 0b0;
-    pte->nG = ~attr.G;
-    pte->super = 0b0;
-    pte->sec_base_addr = pa >> 20;
+        vm_pte_t *pte = &pt[index];
+        // return staff_vm_map_sec(pt,va,pa,attr);
+        pte->tag = 0b10;
+        pte->B = attr.mem_attr & 0x1;
+        pte->C = (attr.mem_attr >> 1) & 0x1;
+        pte->XN = 0b0;
+        pte->domain = attr.dom;
+        pte->IMP = 0b0;
+        pte->AP = attr.AP_perm & 0x11;
+        pte->TEX = attr.mem_attr >> 2;
+        pte->APX = attr.AP_perm >> 2;
+        pte->S = 0b0;
+        pte->nG = ~attr.G;
+        pte->super = 0b1;
+        pte->sec_base_addr = pa >> 24;
+    }
 
-    if(verbose_p)
-        vm_pte_print(pt,pte);
-    assert(pte);
-    return pte;
+    // if(verbose_p)
+    //     vm_pte_print(pt,pte);
+    // assert(pte);
+    return &pt[0];
 }
 
 // lookup 32-bit address va in pt and return the pte
@@ -118,7 +122,7 @@ vm_pte_t *vm_xlate(uint32_t *pa, vm_pt_t *pt, uint32_t va) {
     if (!pte) {
         return 0;
     }
-    *pa = (pte->sec_base_addr) << 20;
+    *pa = (pte->sec_base_addr) << 24;
     return pte;
 }
 

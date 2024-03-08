@@ -148,7 +148,7 @@ pin_mk(uint32_t G,
             .asid = asid,
             .G = G,
             // default: 1MB section.
-            .pagesize = 0b11,
+            .pagesize = 0b00,
             // default: uncacheable
             // .mem_attr = MEM_uncached, // mem_attr,
             .mem_attr = mem_attr,

@@ -88,7 +88,8 @@ typedef struct first_level_descriptor {
         nG:1,       // 17:1     nG=0 ==> global mapping, =1 ==> process specific
         super:1,    // 18:1     selects between section (0) and supersection (1)
         _sbz1:1,    // 19:1     sbz
-        sec_base_addr:12; // 20-31.  must be aligned.
+        _sbz2:4,
+        sec_base_addr:8; // 20-31.  must be aligned.
 } fld_t;
 _Static_assert(sizeof(fld_t) == 4, "invalid size for fld_t!");
 

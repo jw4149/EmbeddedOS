@@ -1,10 +1,10 @@
 BOOTLOADER = my-install
 
-#PROGS += tests-2.0/1-test-basic.c
-#PROGS += tests-2.0/1-test-setup.c
-#PROGS += tests-2.0/1-test-two-addr.c
-#PROGS += tests-2.0/2-test-procmap.c
-PROGS += tests-2.0/test-exception.c
+PROGS += tests-2.0/1-test-basic.c
+PROGS += tests-2.0/1-test-setup.c
+PROGS += tests-2.0/1-test-two-addr.c
+PROGS += tests-2.0/2-test-procmap.c
+#PROGS += tests-2.0/test-exception.c
 
 O = $(CS140E_2024_PATH)/libpi
 STAFF_OBJS += $(O)/staff-objs/staff-full-except.o
