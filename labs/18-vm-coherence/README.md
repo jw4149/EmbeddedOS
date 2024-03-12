@@ -4,6 +4,44 @@
   <img src="images/pi-vm-lab2.jpg" width="700" />
 </p>
 
+-----------------------------------------------------------------------
+***Clarifications***:
+  - The comment for `cp15_domain_ctrl_wr`
+    says you need to "flush_btb, dsb, prefetch flush" but I think you
+    only need the prefetch flush.
+
+  - You will also have to write `cp15_ctrl_reg1_rd()` which reads the
+    control reg 1 and returns it as a `struct control_reg1` 
+    (defined in `armv6-cp15.h`) which is exactly 32-bits wide.  
+
+            struct control_reg1 c1 = cp15_ctrl_reg1_rd();
+
+    It may be easiest to write the routine in the assembly file so you
+    don't have to mess with casting. 
+
+  - Note: the test `4-test-vm-cache-mgmt.c` assumes your enable/disable
+    does an icache invalidation.  As the lab discusses below if you 
+    do not want to do this, and have a good argument for why it is ok
+    to elide, you can change the test so it doesn't check this (see
+    the `mmu_enable` part of the lab below.
+
+  - The code for `mmu_init` should be something like:
+
+        void mmu_init(void) {
+            mmu_reset();
+
+            struct control_reg1 c1 = cp15_ctrl_reg1_rd();
+            c1.XP_pt = 1;
+            cp15_ctrl_reg1_wr(c1);
+
+            // make sure write succeeded.
+            c1 = cp15_ctrl_reg1_rd();
+            assert(c1.XP_pt);
+            assert(!c1.MMU_enabled);
+        }
+
+
+-----------------------------------------------------------------------
 #### tl;dr
 Today you will:
 
@@ -295,9 +333,25 @@ Now you can write the code to turn the MMU on/off:
   - `mmu_enable_set_asm`  (called by `mmu_enable` in `mmu.c`).
   - `mmu_disable_set_asm` (called by `mmu_disable` in `mmu.c`).
 
+Note:
+  - We assume the kernel has already called `mmu_reset` to invalidate
+    hardware state (TLB and caches) to they don't contain trash.  Thus
+    enable does not have to do such initialization.
+
 The high-level sequence is given on page 6-9 of the `arm1176.pdf` document
-(screen shot below).  You will also have to flush:
-   - all caches (D/I cache, the I/D TLBs)
+(screen shot below).  B4-6 (`docs/armv6.annot.pdf`) has additional detail
+for disable if that is helpful.
+
+   - On enable: Don't invalidate the TLBs or pinned-vm may not work.
+   - The data cache is not accessible when the MMU is off.
+     Thus, before disabling the MMU you'll need to clean the data cache
+     or you'll lose dirty entries.
+   - It doesn't *seem* you have to invalidate the icache, but the 
+     test assumes you did.  If you don't want to, and have an argument
+     for why not, you are welcome to remove that part of the test
+     (it checks for icache misses after enable/disable).
+
+Make sure you're correctly using:
    - PrefetchBuffer.
    - BTB
    - and wait for everything correctly.
@@ -332,8 +386,8 @@ are correct.
 ----------------------------------------------------------------------
 ## Part 4: Implement `mmu_sync_pte_mods`
 
-You can follow the recipe on B6-21.  For today just be conservative
-and invalide the icache too.
+You can follow the recipe on B2-23 for modifying page table entries.
+For today just be conservative and invalidate the icache too.
 
 ----------------------------------------------------------------------
 ## Part 5: Implement `cp15_set_procid_ttbr0`
