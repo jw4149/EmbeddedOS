@@ -1,8 +1,8 @@
 tests/2-fat32-jump.o: tests/2-fat32-jump.c \
- /home/engler/class/cs140e-24win//libpi/include/rpi.h \
- /home/engler/class/cs140e-24win//libpi/libc/demand.h \
- /home/engler/class/cs140e-24win//libpi/include/gpio.h \
- /home/engler/class/cs140e-24win//libpi/include/rpi-constants.h \
- /home/engler/class/cs140e-24win//libpi/include/your-prototypes.h pi-sd.h \
- fat32.h mbr.h pi-sd.h mbr-helpers.h pi-files.h \
- /home/engler/class/cs140e-24win//libpi/libc/fast-hash32.h
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/include/rpi.h \
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/libc/demand.h \
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/include/gpio.h \
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/include/rpi-constants.h \
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/include/your-prototypes.h \
+ pi-sd.h fat32.h mbr.h pi-sd.h mbr-helpers.h pi-files.h \
+ /Users/jiayangwang/Desktop/cs140e-24win//libpi/libc/fast-hash32.h

@@ -1,9 +1,10 @@
 BOOTLOADER = my-install
 
-PROGS += tests-2.0/1-test-basic.c
-PROGS += tests-2.0/1-test-setup.c
-PROGS += tests-2.0/1-test-two-addr.c
-PROGS += tests-2.0/2-test-procmap.c
+PROGS += tests/1-test-basic.c
+PROGS += tests/1-test-setup.c
+PROGS += tests/1-test-two-addr.c
+PROGS += tests/2-test-procmap.c
+PROGS += tests/4-test-vm-cache-mgmt.c
 #PROGS += tests-2.0/test-exception.c
 
 O = $(CS140E_2024_PATH)/libpi
@@ -42,4 +43,4 @@ GREP_STR := 'TRACE:\|HASH:\|ERROR:\|PANIC:\|SUCCESS:'
 include $(CS140E_2024_PATH)/libpi/mk/Makefile.robust
 
 clean::
-	make -C tests-2.0 clean
+	make -C tests clean

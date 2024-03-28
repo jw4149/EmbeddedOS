@@ -13,7 +13,7 @@ Disassembly of section .text:
     8014:	e3a0d302 	mov	sp, #134217728	; 0x8000000
     8018:	e3a0b000 	mov	fp, #0, 0
     801c:	eb00045b 	bl	9190 <_cstart>
-    8020:	eb000499 	bl	928c <rpi_reboot>
+    8020:	eb000491 	bl	926c <rpi_reboot>
 
 00008024 <PUT32>:
     8024:	e5801000 	str	r1, [r0]
@@ -48,10 +48,10 @@ Disassembly of section .text:
     8080:	e3a00000 	mov	r0, #0, 0
     8084:	eb000127 	bl	8528 <rpi_exit>
     8088:	e8bd8070 	pop	{r4, r5, r6, pc}
-    808c:	00009788 	.word	0x00009788
-    8090:	00009748 	.word	0x00009748
-    8094:	00009754 	.word	0x00009754
-    8098:	00009768 	.word	0x00009768
+    808c:	00009738 	.word	0x00009738
+    8090:	000096f8 	.word	0x000096f8
+    8094:	00009704 	.word	0x00009704
+    8098:	00009718 	.word	0x00009718
 
 0000809c <notmain>:
     809c:	e92d4010 	push	{r4, lr}
@@ -74,9 +74,9 @@ Disassembly of section .text:
     80e0:	eb000319 	bl	8d4c <printk>
     80e4:	e8bd8010 	pop	{r4, pc}
     80e8:	00008038 	.word	0x00008038
-    80ec:	00009790 	.word	0x00009790
-    80f0:	00009748 	.word	0x00009748
-    80f4:	0000977c 	.word	0x0000977c
+    80ec:	00009740 	.word	0x00009740
+    80f0:	000096f8 	.word	0x000096f8
+    80f4:	0000972c 	.word	0x0000972c
 
 000080f8 <rpi_get_sp>:
     80f8:	e1a0000d 	mov	r0, sp
@@ -152,8 +152,8 @@ Disassembly of section .text:
     81e0:	e16f0f15 	clz	r0, r5
     81e4:	e1a002a0 	lsr	r0, r0, #5
     81e8:	e8bd8070 	pop	{r4, r5, r6, pc}
-    81ec:	00009798 	.word	0x00009798
-    81f0:	000097b0 	.word	0x000097b0
+    81ec:	00009748 	.word	0x00009748
+    81f0:	00009760 	.word	0x00009760
 
 000081f4 <th_free>:
     81f4:	e92d4010 	push	{r4, lr}
@@ -164,7 +164,7 @@ Disassembly of section .text:
     8208:	e59f0004 	ldr	r0, [pc, #4]	; 8214 <th_free+0x20>
     820c:	ebffffd4 	bl	8164 <Q_push>
     8210:	e8bd8010 	pop	{r4, pc}
-    8214:	00009eb0 	.word	0x00009eb0
+    8214:	00009e9c 	.word	0x00009e9c
 
 00008218 <Q_empty>:
     8218:	e5903000 	ldr	r3, [r0]
@@ -200,12 +200,12 @@ Disassembly of section .text:
     8290:	e59f0018 	ldr	r0, [pc, #24]	; 82b0 <Q_empty+0x98>
     8294:	eb0002ac 	bl	8d4c <printk>
     8298:	eb0003b4 	bl	9170 <clean_reboot>
-    829c:	00009844 	.word	0x00009844
-    82a0:	00009ad4 	.word	0x00009ad4
-    82a4:	000097dc 	.word	0x000097dc
-    82a8:	00009814 	.word	0x00009814
-    82ac:	00009888 	.word	0x00009888
-    82b0:	00009854 	.word	0x00009854
+    829c:	000097f4 	.word	0x000097f4
+    82a0:	00009a84 	.word	0x00009a84
+    82a4:	0000978c 	.word	0x0000978c
+    82a8:	000097c4 	.word	0x000097c4
+    82ac:	00009838 	.word	0x00009838
+    82b0:	00009804 	.word	0x00009804
 
 000082b4 <Q_pop>:
     82b4:	e92d4010 	push	{r4, lr}
@@ -246,12 +246,12 @@ Disassembly of section .text:
     8340:	eb00038a 	bl	9170 <clean_reboot>
     8344:	e5803004 	str	r3, [r0, #4]
     8348:	eaffffe7 	b	82ec <Q_pop+0x38>
-    834c:	000098c8 	.word	0x000098c8
-    8350:	00009adc 	.word	0x00009adc
-    8354:	000097dc 	.word	0x000097dc
-    8358:	00009894 	.word	0x00009894
-    835c:	000098cc 	.word	0x000098cc
-    8360:	00009814 	.word	0x00009814
+    834c:	00009878 	.word	0x00009878
+    8350:	00009a8c 	.word	0x00009a8c
+    8354:	0000978c 	.word	0x0000978c
+    8358:	00009844 	.word	0x00009844
+    835c:	0000987c 	.word	0x0000987c
+    8360:	000097c4 	.word	0x000097c4
 
 00008364 <th_alloc>:
     8364:	e92d4030 	push	{r4, r5, lr}
@@ -301,20 +301,20 @@ Disassembly of section .text:
     8414:	e59f0020 	ldr	r0, [pc, #32]	; 843c <th_alloc+0xd8>
     8418:	eb00024b 	bl	8d4c <printk>
     841c:	eb000353 	bl	9170 <clean_reboot>
-    8420:	000097b0 	.word	0x000097b0
-    8424:	00009eb0 	.word	0x00009eb0
-    8428:	00009e9c 	.word	0x00009e9c
+    8420:	00009760 	.word	0x00009760
+    8424:	00009e9c 	.word	0x00009e9c
+    8428:	00009e88 	.word	0x00009e88
     842c:	00002018 	.word	0x00002018
-    8430:	00009930 	.word	0x00009930
-    8434:	00009ae4 	.word	0x00009ae4
-    8438:	000098d8 	.word	0x000098d8
-    843c:	000098e8 	.word	0x000098e8
+    8430:	000098e0 	.word	0x000098e0
+    8434:	00009a94 	.word	0x00009a94
+    8438:	00009888 	.word	0x00009888
+    843c:	00009898 	.word	0x00009898
 
 00008440 <rpi_cur_thread>:
     8440:	e59f3004 	ldr	r3, [pc, #4]	; 844c <rpi_cur_thread+0xc>
     8444:	e5930010 	ldr	r0, [r3, #16]
     8448:	e12fff1e 	bx	lr
-    844c:	00009eb0 	.word	0x00009eb0
+    844c:	00009e9c 	.word	0x00009e9c
 
 00008450 <rpi_fork>:
     8450:	e92d40f0 	push	{r4, r5, r6, r7, lr}
@@ -365,12 +365,12 @@ Disassembly of section .text:
     8504:	e1a00004 	mov	r0, r4
     8508:	e28dd00c 	add	sp, sp, #12, 0
     850c:	e8bd80f0 	pop	{r4, r5, r6, r7, pc}
-    8510:	000097b0 	.word	0x000097b0
+    8510:	00009760 	.word	0x00009760
     8514:	00008114 	.word	0x00008114
-    8518:	00009af0 	.word	0x00009af0
-    851c:	00009748 	.word	0x00009748
-    8520:	00009958 	.word	0x00009958
-    8524:	00009ec4 	.word	0x00009ec4
+    8518:	00009aa0 	.word	0x00009aa0
+    851c:	000096f8 	.word	0x000096f8
+    8520:	00009908 	.word	0x00009908
+    8524:	00009eb0 	.word	0x00009eb0
 
 00008528 <rpi_exit>:
     8528:	e92d4070 	push	{r4, r5, r6, lr}
@@ -406,12 +406,12 @@ Disassembly of section .text:
     85a0:	e1a00005 	mov	r0, r5
     85a4:	ebfffed5 	bl	8100 <rpi_cswitch>
     85a8:	eaffffee 	b	8568 <rpi_exit+0x40>
-    85ac:	00009eb0 	.word	0x00009eb0
-    85b0:	00009afc 	.word	0x00009afc
-    85b4:	000098d8 	.word	0x000098d8
-    85b8:	000099bc 	.word	0x000099bc
-    85bc:	00009748 	.word	0x00009748
-    85c0:	00009990 	.word	0x00009990
+    85ac:	00009e9c 	.word	0x00009e9c
+    85b0:	00009aac 	.word	0x00009aac
+    85b4:	00009888 	.word	0x00009888
+    85b8:	0000996c 	.word	0x0000996c
+    85bc:	000096f8 	.word	0x000096f8
+    85c0:	00009940 	.word	0x00009940
 
 000085c4 <rpi_yield>:
     85c4:	e92d4070 	push	{r4, r5, r6, lr}
@@ -457,12 +457,12 @@ Disassembly of section .text:
     8664:	e1a00005 	mov	r0, r5
     8668:	ebfffea4 	bl	8100 <rpi_cswitch>
     866c:	e8bd8070 	pop	{r4, r5, r6, pc}
-    8670:	000097b0 	.word	0x000097b0
-    8674:	00009ec4 	.word	0x00009ec4
-    8678:	00009eb0 	.word	0x00009eb0
-    867c:	00009b08 	.word	0x00009b08
-    8680:	00009748 	.word	0x00009748
-    8684:	000099dc 	.word	0x000099dc
+    8670:	00009760 	.word	0x00009760
+    8674:	00009eb0 	.word	0x00009eb0
+    8678:	00009e9c 	.word	0x00009e9c
+    867c:	00009ab8 	.word	0x00009ab8
+    8680:	000096f8 	.word	0x000096f8
+    8684:	0000998c 	.word	0x0000998c
 
 00008688 <rpi_thread_start>:
     8688:	e92d4030 	push	{r4, r5, lr}
@@ -544,17 +544,17 @@ Disassembly of section .text:
     87b8:	eb000163 	bl	8d4c <printk>
     87bc:	e28dd00c 	add	sp, sp, #12, 0
     87c0:	e8bd8030 	pop	{r4, r5, pc}
-    87c4:	000097b0 	.word	0x000097b0
-    87c8:	00009b24 	.word	0x00009b24
-    87cc:	00009748 	.word	0x00009748
-    87d0:	00009a20 	.word	0x00009a20
-    87d4:	00009ec4 	.word	0x00009ec4
-    87d8:	00009eb0 	.word	0x00009eb0
-    87dc:	00009a0c 	.word	0x00009a0c
-    87e0:	00009b14 	.word	0x00009b14
-    87e4:	00009a00 	.word	0x00009a00
-    87e8:	00009814 	.word	0x00009814
-    87ec:	00009a34 	.word	0x00009a34
+    87c4:	00009760 	.word	0x00009760
+    87c8:	00009ad4 	.word	0x00009ad4
+    87cc:	000096f8 	.word	0x000096f8
+    87d0:	000099d0 	.word	0x000099d0
+    87d4:	00009eb0 	.word	0x00009eb0
+    87d8:	00009e9c 	.word	0x00009e9c
+    87dc:	000099bc 	.word	0x000099bc
+    87e0:	00009ac4 	.word	0x00009ac4
+    87e4:	000099b0 	.word	0x000099b0
+    87e8:	000097c4 	.word	0x000097c4
+    87ec:	000099e4 	.word	0x000099e4
 
 000087f0 <rpi_print_regs>:
     87f0:	e92d4030 	push	{r4, r5, lr}
@@ -612,34 +612,34 @@ Disassembly of section .text:
     88c0:	e2842004 	add	r2, r4, #4, 0
     88c4:	eafffff4 	b	889c <rpi_print_regs+0xac>
     88c8:	eb000228 	bl	9170 <clean_reboot>
-    88cc:	00009eb0 	.word	0x00009eb0
-    88d0:	00009a58 	.word	0x00009a58
-    88d4:	00009a68 	.word	0x00009a68
-    88d8:	00009a70 	.word	0x00009a70
-    88dc:	00009a7c 	.word	0x00009a7c
-    88e0:	00009b38 	.word	0x00009b38
-    88e4:	000098d8 	.word	0x000098d8
-    88e8:	00009814 	.word	0x00009814
-    88ec:	00009aa8 	.word	0x00009aa8
-    88f0:	00009ac4 	.word	0x00009ac4
+    88cc:	00009e9c 	.word	0x00009e9c
+    88d0:	00009a08 	.word	0x00009a08
+    88d4:	00009a18 	.word	0x00009a18
+    88d8:	00009a20 	.word	0x00009a20
+    88dc:	00009a2c 	.word	0x00009a2c
+    88e0:	00009ae8 	.word	0x00009ae8
+    88e4:	00009888 	.word	0x00009888
+    88e8:	000097c4 	.word	0x000097c4
+    88ec:	00009a58 	.word	0x00009a58
+    88f0:	00009a74 	.word	0x00009a74
 
 000088f4 <kmalloc_heap_end>:
     88f4:	e59f3004 	ldr	r3, [pc, #4]	; 8900 <kmalloc_heap_end+0xc>
     88f8:	e5930000 	ldr	r0, [r3]
     88fc:	e12fff1e 	bx	lr
-    8900:	00009ea0 	.word	0x00009ea0
+    8900:	00009e8c 	.word	0x00009e8c
 
 00008904 <kmalloc_heap_start>:
     8904:	e59f3004 	ldr	r3, [pc, #4]	; 8910 <kmalloc_heap_start+0xc>
     8908:	e5930004 	ldr	r0, [r3, #4]
     890c:	e12fff1e 	bx	lr
-    8910:	00009ea0 	.word	0x00009ea0
+    8910:	00009e8c 	.word	0x00009e8c
 
 00008914 <kmalloc_heap_ptr>:
     8914:	e59f3004 	ldr	r3, [pc, #4]	; 8920 <kmalloc_heap_ptr+0xc>
     8918:	e5930008 	ldr	r0, [r3, #8]
     891c:	e12fff1e 	bx	lr
-    8920:	00009ea0 	.word	0x00009ea0
+    8920:	00009e8c 	.word	0x00009e8c
 
 00008924 <kmalloc_init_set_start>:
     8924:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
@@ -688,14 +688,14 @@ Disassembly of section .text:
     89d0:	e59f0020 	ldr	r0, [pc, #32]	; 89f8 <kmalloc_init_set_start+0xd4>
     89d4:	eb0000dc 	bl	8d4c <printk>
     89d8:	eb0001e4 	bl	9170 <clean_reboot>
-    89dc:	00009ed4 	.word	0x00009ed4
-    89e0:	00009ea0 	.word	0x00009ea0
-    89e4:	00009d1c 	.word	0x00009d1c
-    89e8:	00009b48 	.word	0x00009b48
-    89ec:	00009b54 	.word	0x00009b54
-    89f0:	00009b88 	.word	0x00009b88
-    89f4:	00009814 	.word	0x00009814
-    89f8:	00009b94 	.word	0x00009b94
+    89dc:	00009ec0 	.word	0x00009ec0
+    89e0:	00009e8c 	.word	0x00009e8c
+    89e4:	00009ccc 	.word	0x00009ccc
+    89e8:	00009af8 	.word	0x00009af8
+    89ec:	00009b04 	.word	0x00009b04
+    89f0:	00009b38 	.word	0x00009b38
+    89f4:	000097c4 	.word	0x000097c4
+    89f8:	00009b44 	.word	0x00009b44
 
 000089fc <kmalloc_notzero>:
     89fc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
@@ -741,13 +741,13 @@ Disassembly of section .text:
     8a9c:	e59f001c 	ldr	r0, [pc, #28]	; 8ac0 <kmalloc_notzero+0xc4>
     8aa0:	eb0000a9 	bl	8d4c <printk>
     8aa4:	eb0001b1 	bl	9170 <clean_reboot>
-    8aa8:	00009ea0 	.word	0x00009ea0
-    8aac:	00009b8c 	.word	0x00009b8c
-    8ab0:	00009d34 	.word	0x00009d34
-    8ab4:	00009b48 	.word	0x00009b48
-    8ab8:	00009814 	.word	0x00009814
-    8abc:	00009bd8 	.word	0x00009bd8
-    8ac0:	00009bf0 	.word	0x00009bf0
+    8aa8:	00009e8c 	.word	0x00009e8c
+    8aac:	00009b3c 	.word	0x00009b3c
+    8ab0:	00009ce4 	.word	0x00009ce4
+    8ab4:	00009af8 	.word	0x00009af8
+    8ab8:	000097c4 	.word	0x000097c4
+    8abc:	00009b88 	.word	0x00009b88
+    8ac0:	00009ba0 	.word	0x00009ba0
 
 00008ac4 <kmalloc>:
     8ac4:	e92d4030 	push	{r4, r5, lr}
@@ -771,10 +771,10 @@ Disassembly of section .text:
     8b0c:	e59f0010 	ldr	r0, [pc, #16]	; 8b24 <kmalloc+0x60>
     8b10:	eb00008d 	bl	8d4c <printk>
     8b14:	eb000195 	bl	9170 <clean_reboot>
-    8b18:	00009b8c 	.word	0x00009b8c
-    8b1c:	00009d44 	.word	0x00009d44
-    8b20:	00009b48 	.word	0x00009b48
-    8b24:	00009814 	.word	0x00009814
+    8b18:	00009b3c 	.word	0x00009b3c
+    8b1c:	00009cf4 	.word	0x00009cf4
+    8b20:	00009af8 	.word	0x00009af8
+    8b24:	000097c4 	.word	0x000097c4
 
 00008b28 <kmalloc_aligned>:
     8b28:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
@@ -834,24 +834,24 @@ Disassembly of section .text:
     8c00:	e59f002c 	ldr	r0, [pc, #44]	; 8c34 <kmalloc_aligned+0x10c>
     8c04:	eb000050 	bl	8d4c <printk>
     8c08:	eb000158 	bl	9170 <clean_reboot>
-    8c0c:	00009ea0 	.word	0x00009ea0
-    8c10:	00009b8c 	.word	0x00009b8c
-    8c14:	00009d4c 	.word	0x00009d4c
-    8c18:	00009b48 	.word	0x00009b48
-    8c1c:	00009814 	.word	0x00009814
-    8c20:	00009c78 	.word	0x00009c78
-    8c24:	00009c38 	.word	0x00009c38
-    8c28:	00009c8c 	.word	0x00009c8c
-    8c2c:	00009d5c 	.word	0x00009d5c
-    8c30:	00009cd0 	.word	0x00009cd0
-    8c34:	00009c98 	.word	0x00009c98
+    8c0c:	00009e8c 	.word	0x00009e8c
+    8c10:	00009b3c 	.word	0x00009b3c
+    8c14:	00009cfc 	.word	0x00009cfc
+    8c18:	00009af8 	.word	0x00009af8
+    8c1c:	000097c4 	.word	0x000097c4
+    8c20:	00009c28 	.word	0x00009c28
+    8c24:	00009be8 	.word	0x00009be8
+    8c28:	00009c3c 	.word	0x00009c3c
+    8c2c:	00009d0c 	.word	0x00009d0c
+    8c30:	00009c80 	.word	0x00009c80
+    8c34:	00009c48 	.word	0x00009c48
 
 00008c38 <kfree_all>:
     8c38:	e59f3008 	ldr	r3, [pc, #8]	; 8c48 <kfree_all+0x10>
     8c3c:	e5932004 	ldr	r2, [r3, #4]
     8c40:	e5832008 	str	r2, [r3, #8]
     8c44:	e12fff1e 	bx	lr
-    8c48:	00009ea0 	.word	0x00009ea0
+    8c48:	00009e8c 	.word	0x00009e8c
 
 00008c4c <kfree_pop>:
     8c4c:	e59f3048 	ldr	r3, [pc, #72]	; 8c9c <kfree_pop+0x50>
@@ -874,10 +874,10 @@ Disassembly of section .text:
     8c90:	e59f0010 	ldr	r0, [pc, #16]	; 8ca8 <kfree_pop+0x5c>
     8c94:	eb00002c 	bl	8d4c <printk>
     8c98:	eb000134 	bl	9170 <clean_reboot>
-    8c9c:	00009ea0 	.word	0x00009ea0
-    8ca0:	00009d64 	.word	0x00009d64
-    8ca4:	00009b48 	.word	0x00009b48
-    8ca8:	00009cec 	.word	0x00009cec
+    8c9c:	00009e8c 	.word	0x00009e8c
+    8ca0:	00009d14 	.word	0x00009d14
+    8ca4:	00009af8 	.word	0x00009af8
+    8ca8:	00009c9c 	.word	0x00009c9c
 
 00008cac <memset>:
     8cac:	e3520000 	cmp	r2, #0, 0
@@ -944,7 +944,7 @@ Disassembly of section .text:
     8d90:	e3500002 	cmp	r0, #2, 0
     8d94:	0a000006 	beq	8db4 <emit_val+0x3c>
     8d98:	e58d0000 	str	r0, [sp]
-    8d9c:	e3a03019 	mov	r3, #25, 0
+    8d9c:	e3a0301b 	mov	r3, #27, 0
     8da0:	e59f20c0 	ldr	r2, [pc, #192]	; 8e68 <emit_val+0xf0>
     8da4:	e59f10c0 	ldr	r1, [pc, #192]	; 8e6c <emit_val+0xf4>
     8da8:	e59f00c0 	ldr	r0, [pc, #192]	; 8e70 <emit_val+0xf8>
@@ -995,14 +995,14 @@ Disassembly of section .text:
     8e5c:	8afffff8 	bhi	8e44 <emit_val+0xcc>
     8e60:	e28dd030 	add	sp, sp, #48, 0	; 0x30
     8e64:	e8bd8010 	pop	{r4, pc}
-    8e68:	00009e28 	.word	0x00009e28
-    8e6c:	00009d70 	.word	0x00009d70
-    8e70:	00009d80 	.word	0x00009d80
-    8e74:	00009da4 	.word	0x00009da4
+    8e68:	00009dd8 	.word	0x00009dd8
+    8e6c:	00009d20 	.word	0x00009d20
+    8e70:	00009d30 	.word	0x00009d30
+    8e74:	00009d54 	.word	0x00009d54
     8e78:	cccccccd 	.word	0xcccccccd
-    8e7c:	00009da8 	.word	0x00009da8
-    8e80:	00009db4 	.word	0x00009db4
-    8e84:	00009eac 	.word	0x00009eac
+    8e7c:	00009d58 	.word	0x00009d58
+    8e80:	00009d64 	.word	0x00009d64
+    8e84:	00009e98 	.word	0x00009e98
 
 00008e88 <vprintk>:
     8e88:	e92d4030 	push	{r4, r5, lr}
@@ -1103,14 +1103,14 @@ Disassembly of section .text:
     9004:	e1a04005 	mov	r4, r5
     9008:	eaffffa6 	b	8ea8 <vprintk+0x20>
     900c:	e58d2000 	str	r2, [sp]
-    9010:	e3a03039 	mov	r3, #57, 0	; 0x39
+    9010:	e3a0303b 	mov	r3, #59, 0	; 0x3b
     9014:	e59f2114 	ldr	r2, [pc, #276]	; 9130 <vprintk+0x2a8>
     9018:	e59f1114 	ldr	r1, [pc, #276]	; 9134 <vprintk+0x2ac>
     901c:	e59f0114 	ldr	r0, [pc, #276]	; 9138 <vprintk+0x2b0>
     9020:	ebffff49 	bl	8d4c <printk>
     9024:	eb000051 	bl	9170 <clean_reboot>
     9028:	e58d5000 	str	r5, [sp]
-    902c:	e3a0303c 	mov	r3, #60, 0	; 0x3c
+    902c:	e3a0303e 	mov	r3, #62, 0	; 0x3e
     9030:	e59f20f8 	ldr	r2, [pc, #248]	; 9130 <vprintk+0x2a8>
     9034:	e59f10f8 	ldr	r1, [pc, #248]	; 9134 <vprintk+0x2ac>
     9038:	e59f00f8 	ldr	r0, [pc, #248]	; 9138 <vprintk+0x2b0>
@@ -1166,7 +1166,7 @@ Disassembly of section .text:
     9100:	e1a04005 	mov	r4, r5
     9104:	eaffff67 	b	8ea8 <vprintk+0x20>
     9108:	e58d2000 	str	r2, [sp]
-    910c:	e3a03060 	mov	r3, #96, 0	; 0x60
+    910c:	e3a03062 	mov	r3, #98, 0	; 0x62
     9110:	e59f2018 	ldr	r2, [pc, #24]	; 9130 <vprintk+0x2a8>
     9114:	e59f1018 	ldr	r1, [pc, #24]	; 9134 <vprintk+0x2ac>
     9118:	e59f001c 	ldr	r0, [pc, #28]	; 913c <vprintk+0x2b4>
@@ -1174,17 +1174,17 @@ Disassembly of section .text:
     9120:	eb000012 	bl	9170 <clean_reboot>
     9124:	e28dd014 	add	sp, sp, #20, 0
     9128:	e8bd8030 	pop	{r4, r5, pc}
-    912c:	00009eac 	.word	0x00009eac
-    9130:	00009e34 	.word	0x00009e34
-    9134:	00009d70 	.word	0x00009d70
-    9138:	00009dc8 	.word	0x00009dc8
-    913c:	00009e00 	.word	0x00009e00
+    912c:	00009e98 	.word	0x00009e98
+    9130:	00009de4 	.word	0x00009de4
+    9134:	00009d20 	.word	0x00009d20
+    9138:	00009d78 	.word	0x00009d78
+    913c:	00009db0 	.word	0x00009db0
 
 00009140 <default_putchar>:
     9140:	e92d4010 	push	{r4, lr}
     9144:	e1a04000 	mov	r4, r0
     9148:	e6ef0070 	uxtb	r0, r0
-    914c:	eb0000dd 	bl	94c8 <uart_put8>
+    914c:	eb000086 	bl	936c <uart_put8>
     9150:	e1a00004 	mov	r0, r4
     9154:	e8bd8010 	pop	{r4, pc}
 
@@ -1194,450 +1194,424 @@ Disassembly of section .text:
     9160:	e5830000 	str	r0, [r3]
     9164:	e1a00002 	mov	r0, r2
     9168:	e12fff1e 	bx	lr
-    916c:	00009eac 	.word	0x00009eac
+    916c:	00009e98 	.word	0x00009e98
 
 00009170 <clean_reboot>:
     9170:	e92d4010 	push	{r4, lr}
     9174:	e59f0010 	ldr	r0, [pc, #16]	; 918c <clean_reboot+0x1c>
-    9178:	eb00015d 	bl	96f4 <putk>
-    917c:	eb0000ec 	bl	9534 <uart_flush_tx>
+    9178:	eb0000f0 	bl	9540 <putk>
+    917c:	eb0000ae 	bl	943c <uart_flush_tx>
     9180:	e3a0000a 	mov	r0, #10, 0
-    9184:	eb00006a 	bl	9334 <delay_ms>
-    9188:	eb00003f 	bl	928c <rpi_reboot>
-    918c:	00009e3c 	.word	0x00009e3c
+    9184:	eb000062 	bl	9314 <delay_ms>
+    9188:	eb000037 	bl	926c <rpi_reboot>
+    918c:	00009dec 	.word	0x00009dec
 
 00009190 <_cstart>:
-    9190:	e92d4030 	push	{r4, r5, lr}
-    9194:	e24dd00c 	sub	sp, sp, #12, 0
-    9198:	eb00002f 	bl	925c <custom_loader>
-    919c:	e59f309c 	ldr	r3, [pc, #156]	; 9240 <_cstart+0xb0>
-    91a0:	e59f209c 	ldr	r2, [pc, #156]	; 9244 <_cstart+0xb4>
-    91a4:	e1530002 	cmp	r3, r2
-    91a8:	33a02000 	movcc	r2, #0, 0
-    91ac:	34832004 	strcc	r2, [r3], #4
-    91b0:	3afffffa 	bcc	91a0 <_cstart+0x10>
-    91b4:	e3a02a01 	mov	r2, #4096	; 0x1000
-    91b8:	e3a01000 	mov	r1, #0, 0
-    91bc:	e1a00001 	mov	r0, r1
-    91c0:	ebfffeb9 	bl	8cac <memset>
-    91c4:	e3a04000 	mov	r4, #0, 0
-    91c8:	e1a05004 	mov	r5, r4
-    91cc:	ea000005 	b	91e8 <_cstart+0x58>
-    91d0:	e2855001 	add	r5, r5, #1, 0
-    91d4:	e5912000 	ldr	r2, [r1]
-    91d8:	e1a03005 	mov	r3, r5
-    91dc:	e59f0064 	ldr	r0, [pc, #100]	; 9248 <_cstart+0xb8>
-    91e0:	ebfffed9 	bl	8d4c <printk>
-    91e4:	e2844001 	add	r4, r4, #1, 0
-    91e8:	e3540b01 	cmp	r4, #1024	; 0x400
-    91ec:	2a000004 	bcs	9204 <_cstart+0x74>
-    91f0:	e1a01104 	lsl	r1, r4, #2
-    91f4:	e5913000 	ldr	r3, [r1]
-    91f8:	e3530000 	cmp	r3, #0, 0
-    91fc:	0afffff8 	beq	91e4 <_cstart+0x54>
-    9200:	eafffff2 	b	91d0 <_cstart+0x40>
-    9204:	e3550000 	cmp	r5, #0, 0
-    9208:	1a000004 	bne	9220 <_cstart+0x90>
-    920c:	eb000064 	bl	93a4 <uart_init>
-    9210:	e3a03001 	mov	r3, #1, 0
-    9214:	ee0f3f1c 	mcr	15, 0, r3, cr15, cr12, {0}
-    9218:	ebfffb9f 	bl	809c <notmain>
-    921c:	ebffffd3 	bl	9170 <clean_reboot>
-    9220:	e59f3024 	ldr	r3, [pc, #36]	; 924c <_cstart+0xbc>
-    9224:	e58d3000 	str	r3, [sp]
-    9228:	e3a03019 	mov	r3, #25, 0
-    922c:	e59f201c 	ldr	r2, [pc, #28]	; 9250 <_cstart+0xc0>
-    9230:	e59f101c 	ldr	r1, [pc, #28]	; 9254 <_cstart+0xc4>
-    9234:	e59f001c 	ldr	r0, [pc, #28]	; 9258 <_cstart+0xc8>
-    9238:	ebfffec3 	bl	8d4c <printk>
-    923c:	ebffffcb 	bl	9170 <clean_reboot>
-    9240:	00009eb0 	.word	0x00009eb0
-    9244:	00009ed8 	.word	0x00009ed8
-    9248:	000097b0 	.word	0x000097b0
-    924c:	00009a0c 	.word	0x00009a0c
-    9250:	00009e8c 	.word	0x00009e8c
-    9254:	00009e48 	.word	0x00009e48
-    9258:	00009814 	.word	0x00009814
+    9190:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    9194:	e24dd014 	sub	sp, sp, #20, 0
+    9198:	eb000027 	bl	923c <custom_loader>
+    919c:	e59f3084 	ldr	r3, [pc, #132]	; 9228 <_cstart+0x98>
+    91a0:	ea000001 	b	91ac <_cstart+0x1c>
+    91a4:	e3a02000 	mov	r2, #0, 0
+    91a8:	e4832004 	str	r2, [r3], #4
+    91ac:	e59f2078 	ldr	r2, [pc, #120]	; 922c <_cstart+0x9c>
+    91b0:	e1530002 	cmp	r3, r2
+    91b4:	3afffffa 	bcc	91a4 <_cstart+0x14>
+    91b8:	e3a02a01 	mov	r2, #4096	; 0x1000
+    91bc:	e3a01000 	mov	r1, #0, 0
+    91c0:	e1a00001 	mov	r0, r1
+    91c4:	ebfffeb8 	bl	8cac <memset>
+    91c8:	e3a03000 	mov	r3, #0, 0
+    91cc:	e3530b01 	cmp	r3, #1024	; 0x400
+    91d0:	2a00000f 	bcs	9214 <_cstart+0x84>
+    91d4:	e1a02103 	lsl	r2, r3, #2
+    91d8:	e5921000 	ldr	r1, [r2]
+    91dc:	e3510000 	cmp	r1, #0, 0
+    91e0:	02833001 	addeq	r3, r3, #1, 0
+    91e4:	0afffff8 	beq	91cc <_cstart+0x3c>
+    91e8:	e5923000 	ldr	r3, [r2]
+    91ec:	e3a01001 	mov	r1, #1, 0
+    91f0:	e58d1008 	str	r1, [sp, #8]
+    91f4:	e58d3004 	str	r3, [sp, #4]
+    91f8:	e58d2000 	str	r2, [sp]
+    91fc:	e3a03012 	mov	r3, #18, 0
+    9200:	e59f2028 	ldr	r2, [pc, #40]	; 9230 <_cstart+0xa0>
+    9204:	e59f1028 	ldr	r1, [pc, #40]	; 9234 <_cstart+0xa4>
+    9208:	e59f0028 	ldr	r0, [pc, #40]	; 9238 <_cstart+0xa8>
+    920c:	ebfffece 	bl	8d4c <printk>
+    9210:	ebffffd6 	bl	9170 <clean_reboot>
+    9214:	eb00008d 	bl	9450 <uart_init>
+    9218:	e3a03001 	mov	r3, #1, 0
+    921c:	ee0f3f1c 	mcr	15, 0, r3, cr15, cr12, {0}
+    9220:	ebfffb9d 	bl	809c <notmain>
+    9224:	ebffffd1 	bl	9170 <clean_reboot>
+    9228:	00009e9c 	.word	0x00009e9c
+    922c:	00009ec8 	.word	0x00009ec8
+    9230:	00009e78 	.word	0x00009e78
+    9234:	00009df8 	.word	0x00009df8
+    9238:	00009e3c 	.word	0x00009e3c
 
-0000925c <custom_loader>:
-    925c:	e12fff1e 	bx	lr
+0000923c <custom_loader>:
+    923c:	e12fff1e 	bx	lr
 
-00009260 <at_user_level>:
-    9260:	e10f0000 	mrs	r0, CPSR
-    9264:	e200001f 	and	r0, r0, #31, 0
-    9268:	e3500010 	cmp	r0, #16, 0
-    926c:	13a00000 	movne	r0, #0, 0
-    9270:	03a00001 	moveq	r0, #1, 0
-    9274:	e12fff1e 	bx	lr
+00009240 <at_user_level>:
+    9240:	e10f0000 	mrs	r0, CPSR
+    9244:	e200001f 	and	r0, r0, #31, 0
+    9248:	e3500010 	cmp	r0, #16, 0
+    924c:	13a00000 	movne	r0, #0, 0
+    9250:	03a00001 	moveq	r0, #1, 0
+    9254:	e12fff1e 	bx	lr
 
-00009278 <set_user_level>:
-    9278:	e10f3000 	mrs	r3, CPSR
-    927c:	e3c3301f 	bic	r3, r3, #31, 0
-    9280:	e3833010 	orr	r3, r3, #16, 0
-    9284:	e129f003 	msr	CPSR_fc, r3
-    9288:	e12fff1e 	bx	lr
+00009258 <set_user_level>:
+    9258:	e10f3000 	mrs	r3, CPSR
+    925c:	e3c3301f 	bic	r3, r3, #31, 0
+    9260:	e3833010 	orr	r3, r3, #16, 0
+    9264:	e129f003 	msr	CPSR_fc, r3
+    9268:	e12fff1e 	bx	lr
 
-0000928c <rpi_reboot>:
-    928c:	e92d4010 	push	{r4, lr}
-    9290:	ebfffff2 	bl	9260 <at_user_level>
-    9294:	e3500000 	cmp	r0, #0, 0
-    9298:	1a00000a 	bne	92c8 <rpi_reboot+0x3c>
-    929c:	eb000121 	bl	9728 <reboot_callout>
-    92a0:	eb0000a3 	bl	9534 <uart_flush_tx>
-    92a4:	e3a0000a 	mov	r0, #10, 0
-    92a8:	eb000021 	bl	9334 <delay_ms>
-    92ac:	e59f101c 	ldr	r1, [pc, #28]	; 92d0 <rpi_reboot+0x44>
-    92b0:	e59f001c 	ldr	r0, [pc, #28]	; 92d4 <rpi_reboot+0x48>
-    92b4:	ebfffb5a 	bl	8024 <PUT32>
-    92b8:	e59f1018 	ldr	r1, [pc, #24]	; 92d8 <rpi_reboot+0x4c>
-    92bc:	e59f0018 	ldr	r0, [pc, #24]	; 92dc <rpi_reboot+0x50>
-    92c0:	ebfffb57 	bl	8024 <PUT32>
-    92c4:	eafffffe 	b	92c4 <rpi_reboot+0x38>
-    92c8:	ebffffea 	bl	9278 <set_user_level>
-    92cc:	eafffff2 	b	929c <rpi_reboot+0x10>
-    92d0:	5a000001 	.word	0x5a000001
-    92d4:	20100024 	.word	0x20100024
-    92d8:	5a000020 	.word	0x5a000020
-    92dc:	2010001c 	.word	0x2010001c
+0000926c <rpi_reboot>:
+    926c:	e92d4010 	push	{r4, lr}
+    9270:	ebfffff2 	bl	9240 <at_user_level>
+    9274:	e3500000 	cmp	r0, #0, 0
+    9278:	1a00000a 	bne	92a8 <rpi_reboot+0x3c>
+    927c:	eb0000bc 	bl	9574 <reboot_callout>
+    9280:	eb00006d 	bl	943c <uart_flush_tx>
+    9284:	e3a0000a 	mov	r0, #10, 0
+    9288:	eb000021 	bl	9314 <delay_ms>
+    928c:	e59f101c 	ldr	r1, [pc, #28]	; 92b0 <rpi_reboot+0x44>
+    9290:	e59f001c 	ldr	r0, [pc, #28]	; 92b4 <rpi_reboot+0x48>
+    9294:	ebfffb62 	bl	8024 <PUT32>
+    9298:	e59f1018 	ldr	r1, [pc, #24]	; 92b8 <rpi_reboot+0x4c>
+    929c:	e59f0018 	ldr	r0, [pc, #24]	; 92bc <rpi_reboot+0x50>
+    92a0:	ebfffb5f 	bl	8024 <PUT32>
+    92a4:	eafffffe 	b	92a4 <rpi_reboot+0x38>
+    92a8:	ebffffea 	bl	9258 <set_user_level>
+    92ac:	eafffff2 	b	927c <rpi_reboot+0x10>
+    92b0:	5a000001 	.word	0x5a000001
+    92b4:	20100024 	.word	0x20100024
+    92b8:	5a000020 	.word	0x5a000020
+    92bc:	2010001c 	.word	0x2010001c
 
-000092e0 <timer_get_usec_raw>:
-    92e0:	e92d4010 	push	{r4, lr}
-    92e4:	e59f0004 	ldr	r0, [pc, #4]	; 92f0 <timer_get_usec_raw+0x10>
-    92e8:	ebfffb4f 	bl	802c <GET32>
+000092c0 <timer_get_usec_raw>:
+    92c0:	e92d4010 	push	{r4, lr}
+    92c4:	e59f0004 	ldr	r0, [pc, #4]	; 92d0 <timer_get_usec_raw+0x10>
+    92c8:	ebfffb57 	bl	802c <GET32>
+    92cc:	e8bd8010 	pop	{r4, pc}
+    92d0:	20003004 	.word	0x20003004
+
+000092d4 <timer_get_usec>:
+    92d4:	e92d4010 	push	{r4, lr}
+    92d8:	eb0000a6 	bl	9578 <dev_barrier>
+    92dc:	ebfffff7 	bl	92c0 <timer_get_usec_raw>
+    92e0:	e1a04000 	mov	r4, r0
+    92e4:	eb0000a3 	bl	9578 <dev_barrier>
+    92e8:	e1a00004 	mov	r0, r4
     92ec:	e8bd8010 	pop	{r4, pc}
-    92f0:	20003004 	.word	0x20003004
 
-000092f4 <timer_get_usec>:
-    92f4:	e92d4010 	push	{r4, lr}
-    92f8:	eb00010b 	bl	972c <dev_barrier>
-    92fc:	ebfffff7 	bl	92e0 <timer_get_usec_raw>
-    9300:	e1a04000 	mov	r4, r0
-    9304:	eb000108 	bl	972c <dev_barrier>
-    9308:	e1a00004 	mov	r0, r4
-    930c:	e8bd8010 	pop	{r4, pc}
+000092f0 <delay_us>:
+    92f0:	e92d4070 	push	{r4, r5, r6, lr}
+    92f4:	e1a05000 	mov	r5, r0
+    92f8:	ebfffff5 	bl	92d4 <timer_get_usec>
+    92fc:	e1a04000 	mov	r4, r0
+    9300:	ebfffff3 	bl	92d4 <timer_get_usec>
+    9304:	e0400004 	sub	r0, r0, r4
+    9308:	e1500005 	cmp	r0, r5
+    930c:	3afffffb 	bcc	9300 <delay_us+0x10>
+    9310:	e8bd8070 	pop	{r4, r5, r6, pc}
 
-00009310 <delay_us>:
-    9310:	e92d4070 	push	{r4, r5, r6, lr}
-    9314:	e1a05000 	mov	r5, r0
-    9318:	ebfffff5 	bl	92f4 <timer_get_usec>
-    931c:	e1a04000 	mov	r4, r0
-    9320:	ebfffff3 	bl	92f4 <timer_get_usec>
-    9324:	e0400004 	sub	r0, r0, r4
-    9328:	e1500005 	cmp	r0, r5
-    932c:	3afffffb 	bcc	9320 <delay_us+0x10>
-    9330:	e8bd8070 	pop	{r4, r5, r6, pc}
+00009314 <delay_ms>:
+    9314:	e92d4010 	push	{r4, lr}
+    9318:	e0603280 	rsb	r3, r0, r0, lsl #5
+    931c:	e0800103 	add	r0, r0, r3, lsl #2
+    9320:	e1a00180 	lsl	r0, r0, #3
+    9324:	ebfffff1 	bl	92f0 <delay_us>
+    9328:	e8bd8010 	pop	{r4, pc}
 
-00009334 <delay_ms>:
-    9334:	e92d4010 	push	{r4, lr}
-    9338:	e0603280 	rsb	r3, r0, r0, lsl #5
-    933c:	e0800103 	add	r0, r0, r3, lsl #2
-    9340:	e1a00180 	lsl	r0, r0, #3
-    9344:	ebfffff1 	bl	9310 <delay_us>
-    9348:	e8bd8010 	pop	{r4, pc}
+0000932c <delay_sec>:
+    932c:	e92d4010 	push	{r4, lr}
+    9330:	e0603280 	rsb	r3, r0, r0, lsl #5
+    9334:	e0800103 	add	r0, r0, r3, lsl #2
+    9338:	e1a00180 	lsl	r0, r0, #3
+    933c:	ebfffff4 	bl	9314 <delay_ms>
+    9340:	e8bd8010 	pop	{r4, pc}
 
-0000934c <delay_sec>:
-    934c:	e92d4010 	push	{r4, lr}
-    9350:	e0603280 	rsb	r3, r0, r0, lsl #5
-    9354:	e0800103 	add	r0, r0, r3, lsl #2
-    9358:	e1a00180 	lsl	r0, r0, #3
-    935c:	ebfffff4 	bl	9334 <delay_ms>
-    9360:	e8bd8010 	pop	{r4, pc}
+00009344 <uart_can_put8>:
+    9344:	e92d4010 	push	{r4, lr}
+    9348:	eb00008a 	bl	9578 <dev_barrier>
+    934c:	e59f0014 	ldr	r0, [pc, #20]	; 9368 <uart_can_put8+0x24>
+    9350:	ebfffb35 	bl	802c <GET32>
+    9354:	e1a042a0 	lsr	r4, r0, #5
+    9358:	e2044001 	and	r4, r4, #1, 0
+    935c:	eb000085 	bl	9578 <dev_barrier>
+    9360:	e1a00004 	mov	r0, r4
+    9364:	e8bd8010 	pop	{r4, pc}
+    9368:	20215054 	.word	0x20215054
 
-00009364 <and_in32>:
-    9364:	e92d4070 	push	{r4, r5, r6, lr}
-    9368:	e1a04000 	mov	r4, r0
-    936c:	e1a05001 	mov	r5, r1
-    9370:	ebfffb2d 	bl	802c <GET32>
-    9374:	e0001005 	and	r1, r0, r5
-    9378:	e1a00004 	mov	r0, r4
-    937c:	ebfffb28 	bl	8024 <PUT32>
-    9380:	e8bd8070 	pop	{r4, r5, r6, pc}
+0000936c <uart_put8>:
+    936c:	e92d4010 	push	{r4, lr}
+    9370:	e1a04000 	mov	r4, r0
+    9374:	eb00007f 	bl	9578 <dev_barrier>
+    9378:	ebfffff1 	bl	9344 <uart_can_put8>
+    937c:	e3500000 	cmp	r0, #0, 0
+    9380:	0afffffc 	beq	9378 <uart_put8+0xc>
+    9384:	e1a01004 	mov	r1, r4
+    9388:	e59f000c 	ldr	r0, [pc, #12]	; 939c <uart_put8+0x30>
+    938c:	ebfffb24 	bl	8024 <PUT32>
+    9390:	eb000078 	bl	9578 <dev_barrier>
+    9394:	e3a00000 	mov	r0, #0, 0
+    9398:	e8bd8010 	pop	{r4, pc}
+    939c:	20215040 	.word	0x20215040
 
-00009384 <or_in32>:
-    9384:	e92d4070 	push	{r4, r5, r6, lr}
-    9388:	e1a04000 	mov	r4, r0
-    938c:	e1a05001 	mov	r5, r1
-    9390:	ebfffb25 	bl	802c <GET32>
-    9394:	e1801005 	orr	r1, r0, r5
-    9398:	e1a00004 	mov	r0, r4
-    939c:	ebfffb20 	bl	8024 <PUT32>
-    93a0:	e8bd8070 	pop	{r4, r5, r6, pc}
+000093a0 <uart_has_data>:
+    93a0:	e92d4010 	push	{r4, lr}
+    93a4:	eb000073 	bl	9578 <dev_barrier>
+    93a8:	e59f0010 	ldr	r0, [pc, #16]	; 93c0 <uart_has_data+0x20>
+    93ac:	ebfffb1e 	bl	802c <GET32>
+    93b0:	e2004001 	and	r4, r0, #1, 0
+    93b4:	eb00006f 	bl	9578 <dev_barrier>
+    93b8:	e1a00004 	mov	r0, r4
+    93bc:	e8bd8010 	pop	{r4, pc}
+    93c0:	20215054 	.word	0x20215054
 
-000093a4 <uart_init>:
-    93a4:	e92d4010 	push	{r4, lr}
-    93a8:	eb0000df 	bl	972c <dev_barrier>
-    93ac:	e3a01002 	mov	r1, #2, 0
-    93b0:	e3a0000e 	mov	r0, #14, 0
-    93b4:	eb0000ad 	bl	9670 <gpio_set_function>
-    93b8:	e3a01002 	mov	r1, #2, 0
-    93bc:	e3a0000f 	mov	r0, #15, 0
-    93c0:	eb0000aa 	bl	9670 <gpio_set_function>
-    93c4:	eb0000d8 	bl	972c <dev_barrier>
-    93c8:	e3a01001 	mov	r1, #1, 0
-    93cc:	e59f0064 	ldr	r0, [pc, #100]	; 9438 <uart_init+0x94>
-    93d0:	ebffffeb 	bl	9384 <or_in32>
-    93d4:	eb0000d4 	bl	972c <dev_barrier>
-    93d8:	e59f405c 	ldr	r4, [pc, #92]	; 943c <uart_init+0x98>
-    93dc:	e3a01000 	mov	r1, #0, 0
-    93e0:	e1a00004 	mov	r0, r4
-    93e4:	ebfffb0e 	bl	8024 <PUT32>
-    93e8:	e3a01000 	mov	r1, #0, 0
-    93ec:	e59f004c 	ldr	r0, [pc, #76]	; 9440 <uart_init+0x9c>
-    93f0:	ebfffb0b 	bl	8024 <PUT32>
-    93f4:	e3a01003 	mov	r1, #3, 0
-    93f8:	e59f0044 	ldr	r0, [pc, #68]	; 9444 <uart_init+0xa0>
-    93fc:	ebfffb08 	bl	8024 <PUT32>
-    9400:	e3a01000 	mov	r1, #0, 0
-    9404:	e59f003c 	ldr	r0, [pc, #60]	; 9448 <uart_init+0xa4>
-    9408:	ebfffb05 	bl	8024 <PUT32>
-    940c:	e3a01006 	mov	r1, #6, 0
-    9410:	e59f0034 	ldr	r0, [pc, #52]	; 944c <uart_init+0xa8>
-    9414:	ebfffb02 	bl	8024 <PUT32>
-    9418:	e59f1030 	ldr	r1, [pc, #48]	; 9450 <uart_init+0xac>
-    941c:	e59f0030 	ldr	r0, [pc, #48]	; 9454 <uart_init+0xb0>
-    9420:	ebfffaff 	bl	8024 <PUT32>
-    9424:	e3a01003 	mov	r1, #3, 0
-    9428:	e1a00004 	mov	r0, r4
-    942c:	ebfffafc 	bl	8024 <PUT32>
-    9430:	eb0000bd 	bl	972c <dev_barrier>
+000093c4 <uart_get8>:
+    93c4:	e92d4010 	push	{r4, lr}
+    93c8:	eb00006a 	bl	9578 <dev_barrier>
+    93cc:	ebfffff3 	bl	93a0 <uart_has_data>
+    93d0:	e3500000 	cmp	r0, #0, 0
+    93d4:	0afffffc 	beq	93cc <uart_get8+0x8>
+    93d8:	e59f0010 	ldr	r0, [pc, #16]	; 93f0 <uart_get8+0x2c>
+    93dc:	ebfffb12 	bl	802c <GET32>
+    93e0:	e6ef4070 	uxtb	r4, r0
+    93e4:	eb000063 	bl	9578 <dev_barrier>
+    93e8:	e1a00004 	mov	r0, r4
+    93ec:	e8bd8010 	pop	{r4, pc}
+    93f0:	20215040 	.word	0x20215040
+
+000093f4 <uart_get8_async>:
+    93f4:	e92d4010 	push	{r4, lr}
+    93f8:	ebffffe8 	bl	93a0 <uart_has_data>
+    93fc:	e3500000 	cmp	r0, #0, 0
+    9400:	0a000001 	beq	940c <uart_get8_async+0x18>
+    9404:	ebffffee 	bl	93c4 <uart_get8>
+    9408:	e8bd8010 	pop	{r4, pc}
+    940c:	e3e00000 	mvn	r0, #0, 0
+    9410:	e8bd8010 	pop	{r4, pc}
+
+00009414 <uart_tx_is_empty>:
+    9414:	e92d4010 	push	{r4, lr}
+    9418:	eb000056 	bl	9578 <dev_barrier>
+    941c:	e59f0014 	ldr	r0, [pc, #20]	; 9438 <uart_tx_is_empty+0x24>
+    9420:	ebfffb01 	bl	802c <GET32>
+    9424:	e1a04320 	lsr	r4, r0, #6
+    9428:	e2044001 	and	r4, r4, #1, 0
+    942c:	eb000051 	bl	9578 <dev_barrier>
+    9430:	e1a00004 	mov	r0, r4
     9434:	e8bd8010 	pop	{r4, pc}
-    9438:	20215004 	.word	0x20215004
-    943c:	20215060 	.word	0x20215060
-    9440:	20215044 	.word	0x20215044
-    9444:	2021504c 	.word	0x2021504c
-    9448:	20215050 	.word	0x20215050
-    944c:	20215048 	.word	0x20215048
-    9450:	0000010e 	.word	0x0000010e
-    9454:	20215068 	.word	0x20215068
+    9438:	20215054 	.word	0x20215054
 
-00009458 <uart_can_getc>:
-    9458:	e92d4010 	push	{r4, lr}
-    945c:	e59f0008 	ldr	r0, [pc, #8]	; 946c <uart_can_getc+0x14>
+0000943c <uart_flush_tx>:
+    943c:	e92d4010 	push	{r4, lr}
+    9440:	ebfffff3 	bl	9414 <uart_tx_is_empty>
+    9444:	e3500000 	cmp	r0, #0, 0
+    9448:	0afffffc 	beq	9440 <uart_flush_tx+0x4>
+    944c:	e8bd8010 	pop	{r4, pc}
+
+00009450 <uart_init>:
+    9450:	e92d4010 	push	{r4, lr}
+    9454:	eb000047 	bl	9578 <dev_barrier>
+    9458:	e59f4098 	ldr	r4, [pc, #152]	; 94f8 <uart_init+0xa8>
+    945c:	e1a00004 	mov	r0, r4
     9460:	ebfffaf1 	bl	802c <GET32>
-    9464:	e2000001 	and	r0, r0, #1, 0
-    9468:	e8bd8010 	pop	{r4, pc}
-    946c:	20215064 	.word	0x20215064
+    9464:	e3801001 	orr	r1, r0, #1, 0
+    9468:	e1a00004 	mov	r0, r4
+    946c:	ebfffaec 	bl	8024 <PUT32>
+    9470:	eb000040 	bl	9578 <dev_barrier>
+    9474:	e284405c 	add	r4, r4, #92, 0	; 0x5c
+    9478:	e3a01000 	mov	r1, #0, 0
+    947c:	e1a00004 	mov	r0, r4
+    9480:	ebfffae7 	bl	8024 <PUT32>
+    9484:	eb00003b 	bl	9578 <dev_barrier>
+    9488:	e3a01006 	mov	r1, #6, 0
+    948c:	e59f0068 	ldr	r0, [pc, #104]	; 94fc <uart_init+0xac>
+    9490:	ebfffae3 	bl	8024 <PUT32>
+    9494:	eb000037 	bl	9578 <dev_barrier>
+    9498:	e3a01000 	mov	r1, #0, 0
+    949c:	e59f005c 	ldr	r0, [pc, #92]	; 9500 <uart_init+0xb0>
+    94a0:	ebfffadf 	bl	8024 <PUT32>
+    94a4:	eb000033 	bl	9578 <dev_barrier>
+    94a8:	e3a01003 	mov	r1, #3, 0
+    94ac:	e59f0050 	ldr	r0, [pc, #80]	; 9504 <uart_init+0xb4>
+    94b0:	ebfffadb 	bl	8024 <PUT32>
+    94b4:	eb00002f 	bl	9578 <dev_barrier>
+    94b8:	e59f1048 	ldr	r1, [pc, #72]	; 9508 <uart_init+0xb8>
+    94bc:	e59f0048 	ldr	r0, [pc, #72]	; 950c <uart_init+0xbc>
+    94c0:	ebfffad7 	bl	8024 <PUT32>
+    94c4:	eb00002b 	bl	9578 <dev_barrier>
+    94c8:	e3a01002 	mov	r1, #2, 0
+    94cc:	e3a0000e 	mov	r0, #14, 0
+    94d0:	eb00002e 	bl	9590 <gpio_set_function>
+    94d4:	e3a01002 	mov	r1, #2, 0
+    94d8:	e3a0000f 	mov	r0, #15, 0
+    94dc:	eb00002b 	bl	9590 <gpio_set_function>
+    94e0:	eb000024 	bl	9578 <dev_barrier>
+    94e4:	e3a01003 	mov	r1, #3, 0
+    94e8:	e1a00004 	mov	r0, r4
+    94ec:	ebfffacc 	bl	8024 <PUT32>
+    94f0:	ebffffd1 	bl	943c <uart_flush_tx>
+    94f4:	e8bd8010 	pop	{r4, pc}
+    94f8:	20215004 	.word	0x20215004
+    94fc:	20215048 	.word	0x20215048
+    9500:	20215044 	.word	0x20215044
+    9504:	2021504c 	.word	0x2021504c
+    9508:	0000010f 	.word	0x0000010f
+    950c:	20215068 	.word	0x20215068
 
-00009470 <uart_can_putc>:
-    9470:	e92d4010 	push	{r4, lr}
-    9474:	e59f0010 	ldr	r0, [pc, #16]	; 948c <uart_can_putc+0x1c>
-    9478:	ebfffaeb 	bl	802c <GET32>
-    947c:	e3100002 	tst	r0, #2, 0
-    9480:	13a00001 	movne	r0, #1, 0
-    9484:	03a00000 	moveq	r0, #0, 0
-    9488:	e8bd8010 	pop	{r4, pc}
-    948c:	20215064 	.word	0x20215064
+00009510 <uart_disable>:
+    9510:	e92d4010 	push	{r4, lr}
+    9514:	eb000017 	bl	9578 <dev_barrier>
+    9518:	ebffffc7 	bl	943c <uart_flush_tx>
+    951c:	e59f4018 	ldr	r4, [pc, #24]	; 953c <uart_disable+0x2c>
+    9520:	e1a00004 	mov	r0, r4
+    9524:	ebfffac0 	bl	802c <GET32>
+    9528:	e3c01001 	bic	r1, r0, #1, 0
+    952c:	e1a00004 	mov	r0, r4
+    9530:	ebfffabb 	bl	8024 <PUT32>
+    9534:	eb00000f 	bl	9578 <dev_barrier>
+    9538:	e8bd8010 	pop	{r4, pc}
+    953c:	20215004 	.word	0x20215004
 
-00009490 <uart_get8>:
-    9490:	e92d4010 	push	{r4, lr}
-    9494:	eb0000a4 	bl	972c <dev_barrier>
-    9498:	ea000000 	b	94a0 <uart_get8+0x10>
-    949c:	eb0000a8 	bl	9744 <rpi_wait>
-    94a0:	ebffffec 	bl	9458 <uart_can_getc>
-    94a4:	e3500000 	cmp	r0, #0, 0
-    94a8:	0afffffb 	beq	949c <uart_get8+0xc>
-    94ac:	e59f0010 	ldr	r0, [pc, #16]	; 94c4 <uart_get8+0x34>
-    94b0:	ebfffadd 	bl	802c <GET32>
-    94b4:	e6ef4070 	uxtb	r4, r0
-    94b8:	eb00009b 	bl	972c <dev_barrier>
-    94bc:	e1a00004 	mov	r0, r4
-    94c0:	e8bd8010 	pop	{r4, pc}
-    94c4:	20215040 	.word	0x20215040
-
-000094c8 <uart_put8>:
-    94c8:	e92d4010 	push	{r4, lr}
-    94cc:	e1a04000 	mov	r4, r0
-    94d0:	eb000095 	bl	972c <dev_barrier>
-    94d4:	ea000000 	b	94dc <uart_put8+0x14>
-    94d8:	eb000099 	bl	9744 <rpi_wait>
-    94dc:	ebffffe3 	bl	9470 <uart_can_putc>
-    94e0:	e3500000 	cmp	r0, #0, 0
-    94e4:	0afffffb 	beq	94d8 <uart_put8+0x10>
-    94e8:	e1a01004 	mov	r1, r4
-    94ec:	e59f000c 	ldr	r0, [pc, #12]	; 9500 <uart_put8+0x38>
-    94f0:	ebfffacb 	bl	8024 <PUT32>
-    94f4:	eb00008c 	bl	972c <dev_barrier>
-    94f8:	e3a00001 	mov	r0, #1, 0
-    94fc:	e8bd8010 	pop	{r4, pc}
-    9500:	20215040 	.word	0x20215040
-
-00009504 <uart_has_data>:
-    9504:	e92d4010 	push	{r4, lr}
-    9508:	eb000087 	bl	972c <dev_barrier>
-    950c:	ebffffd1 	bl	9458 <uart_can_getc>
-    9510:	e8bd8010 	pop	{r4, pc}
-
-00009514 <uart_tx_is_empty>:
-    9514:	e92d4010 	push	{r4, lr}
-    9518:	eb000083 	bl	972c <dev_barrier>
-    951c:	e59f000c 	ldr	r0, [pc, #12]	; 9530 <uart_tx_is_empty+0x1c>
-    9520:	ebfffac1 	bl	802c <GET32>
-    9524:	e1a004a0 	lsr	r0, r0, #9
-    9528:	e2000001 	and	r0, r0, #1, 0
-    952c:	e8bd8010 	pop	{r4, pc}
-    9530:	20215064 	.word	0x20215064
-
-00009534 <uart_flush_tx>:
-    9534:	e92d4010 	push	{r4, lr}
-    9538:	ea000000 	b	9540 <uart_flush_tx+0xc>
-    953c:	eb000080 	bl	9744 <rpi_wait>
-    9540:	ebfffff3 	bl	9514 <uart_tx_is_empty>
-    9544:	e3500000 	cmp	r0, #0, 0
-    9548:	0afffffb 	beq	953c <uart_flush_tx+0x8>
-    954c:	e8bd8010 	pop	{r4, pc}
-
-00009550 <uart_disable>:
-    9550:	e92d4010 	push	{r4, lr}
-    9554:	ebfffff6 	bl	9534 <uart_flush_tx>
-    9558:	eb000073 	bl	972c <dev_barrier>
-    955c:	e3e01001 	mvn	r1, #1, 0
-    9560:	e59f0008 	ldr	r0, [pc, #8]	; 9570 <uart_disable+0x20>
-    9564:	ebffff7e 	bl	9364 <and_in32>
-    9568:	eb00006f 	bl	972c <dev_barrier>
+00009540 <putk>:
+    9540:	e92d4010 	push	{r4, lr}
+    9544:	e1a04000 	mov	r4, r0
+    9548:	e5d40000 	ldrb	r0, [r4]
+    954c:	e3500000 	cmp	r0, #0, 0
+    9550:	0a000004 	beq	9568 <putk+0x28>
+    9554:	e59f3014 	ldr	r3, [pc, #20]	; 9570 <putk+0x30>
+    9558:	e5933000 	ldr	r3, [r3]
+    955c:	e12fff33 	blx	r3
+    9560:	e2844001 	add	r4, r4, #1, 0
+    9564:	eafffff7 	b	9548 <putk+0x8>
+    9568:	e3a00001 	mov	r0, #1, 0
     956c:	e8bd8010 	pop	{r4, pc}
-    9570:	20215004 	.word	0x20215004
+    9570:	00009e98 	.word	0x00009e98
 
-00009574 <using_staff_uart>:
+00009574 <reboot_callout>:
     9574:	e12fff1e 	bx	lr
 
-00009578 <gpio_set_on>:
-    9578:	e350002f 	cmp	r0, #47, 0	; 0x2f
-    957c:	1350001f 	cmpne	r0, #31, 0
-    9580:	812fff1e 	bxhi	lr
-    9584:	e92d4010 	push	{r4, lr}
-    9588:	e350001f 	cmp	r0, #31, 0
-    958c:	9a000007 	bls	95b0 <gpio_set_on+0x38>
-    9590:	e3500035 	cmp	r0, #53, 0	; 0x35
-    9594:	88bd8010 	pophi	{r4, pc}
-    9598:	e2400020 	sub	r0, r0, #32, 0
-    959c:	e3a01001 	mov	r1, #1, 0
-    95a0:	e1a01011 	lsl	r1, r1, r0
-    95a4:	e59f0018 	ldr	r0, [pc, #24]	; 95c4 <gpio_set_on+0x4c>
-    95a8:	ebfffa9d 	bl	8024 <PUT32>
-    95ac:	e8bd8010 	pop	{r4, pc}
-    95b0:	e3a01001 	mov	r1, #1, 0
-    95b4:	e1a01011 	lsl	r1, r1, r0
-    95b8:	e59f0008 	ldr	r0, [pc, #8]	; 95c8 <gpio_set_on+0x50>
-    95bc:	ebfffa98 	bl	8024 <PUT32>
-    95c0:	e8bd8010 	pop	{r4, pc}
-    95c4:	20200020 	.word	0x20200020
-    95c8:	2020001c 	.word	0x2020001c
+00009578 <dev_barrier>:
+    9578:	ea000002 	b	9588 <dsb>
 
-000095cc <gpio_set_off>:
-    95cc:	e350002f 	cmp	r0, #47, 0	; 0x2f
-    95d0:	1350001f 	cmpne	r0, #31, 0
-    95d4:	812fff1e 	bxhi	lr
-    95d8:	e92d4010 	push	{r4, lr}
-    95dc:	e350001f 	cmp	r0, #31, 0
-    95e0:	9a000007 	bls	9604 <gpio_set_off+0x38>
-    95e4:	e3500035 	cmp	r0, #53, 0	; 0x35
-    95e8:	88bd8010 	pophi	{r4, pc}
-    95ec:	e2400020 	sub	r0, r0, #32, 0
-    95f0:	e3a01001 	mov	r1, #1, 0
-    95f4:	e1a01011 	lsl	r1, r1, r0
-    95f8:	e59f0018 	ldr	r0, [pc, #24]	; 9618 <gpio_set_off+0x4c>
-    95fc:	ebfffa88 	bl	8024 <PUT32>
-    9600:	e8bd8010 	pop	{r4, pc}
-    9604:	e3a01001 	mov	r1, #1, 0
-    9608:	e1a01011 	lsl	r1, r1, r0
-    960c:	e59f0008 	ldr	r0, [pc, #8]	; 961c <gpio_set_off+0x50>
-    9610:	ebfffa83 	bl	8024 <PUT32>
-    9614:	e8bd8010 	pop	{r4, pc}
-    9618:	2020002c 	.word	0x2020002c
-    961c:	20200028 	.word	0x20200028
+0000957c <dmb>:
+    957c:	e3a00000 	mov	r0, #0, 0
+    9580:	ee070fba 	mcr	15, 0, r0, cr7, cr10, {5}
+    9584:	e12fff1e 	bx	lr
 
-00009620 <gpio_write>:
-    9620:	e92d4010 	push	{r4, lr}
-    9624:	e3510000 	cmp	r1, #0, 0
-    9628:	0a000001 	beq	9634 <gpio_write+0x14>
-    962c:	ebffffd1 	bl	9578 <gpio_set_on>
-    9630:	e8bd8010 	pop	{r4, pc}
-    9634:	ebffffe4 	bl	95cc <gpio_set_off>
-    9638:	e8bd8010 	pop	{r4, pc}
+00009588 <dsb>:
+    9588:	ee070f9a 	mcr	15, 0, r0, cr7, cr10, {4}
+    958c:	e12fff1e 	bx	lr
 
-0000963c <gpio_read>:
-    963c:	e350002f 	cmp	r0, #47, 0	; 0x2f
-    9640:	1350001f 	cmpne	r0, #31, 0
-    9644:	8a000006 	bhi	9664 <gpio_read+0x28>
-    9648:	e92d4010 	push	{r4, lr}
-    964c:	e1a04000 	mov	r4, r0
-    9650:	e59f0014 	ldr	r0, [pc, #20]	; 966c <gpio_read+0x30>
-    9654:	ebfffa74 	bl	802c <GET32>
-    9658:	e1a00430 	lsr	r0, r0, r4
-    965c:	e2000001 	and	r0, r0, #1, 0
-    9660:	e8bd8010 	pop	{r4, pc}
-    9664:	e3e00000 	mvn	r0, #0, 0
-    9668:	e12fff1e 	bx	lr
-    966c:	20200034 	.word	0x20200034
+00009590 <gpio_set_function>:
+    9590:	e350002f 	cmp	r0, #47, 0	; 0x2f
+    9594:	1350001f 	cmpne	r0, #31, 0
+    9598:	812fff1e 	bxhi	lr
+    959c:	e92d4070 	push	{r4, r5, r6, lr}
+    95a0:	e1a05001 	mov	r5, r1
+    95a4:	e3d13007 	bics	r3, r1, #7, 0
+    95a8:	18bd8070 	popne	{r4, r5, r6, pc}
+    95ac:	e59f3040 	ldr	r3, [pc, #64]	; 95f4 <gpio_set_function+0x64>
+    95b0:	e0832093 	umull	r2, r3, r3, r0
+    95b4:	e1a031a3 	lsr	r3, r3, #3
+    95b8:	e1a02003 	mov	r2, r3
+    95bc:	e0833103 	add	r3, r3, r3, lsl #2
+    95c0:	e0403083 	sub	r3, r0, r3, lsl #1
+    95c4:	e0834083 	add	r4, r3, r3, lsl #1
+    95c8:	e2820302 	add	r0, r2, #134217728	; 0x8000000
+    95cc:	e2800702 	add	r0, r0, #524288	; 0x80000
+    95d0:	e1a06100 	lsl	r6, r0, #2
+    95d4:	e1a00006 	mov	r0, r6
+    95d8:	ebfffa93 	bl	802c <GET32>
+    95dc:	e3a01007 	mov	r1, #7, 0
+    95e0:	e1c01411 	bic	r1, r0, r1, lsl r4
+    95e4:	e1811415 	orr	r1, r1, r5, lsl r4
+    95e8:	e1a00006 	mov	r0, r6
+    95ec:	ebfffa8c 	bl	8024 <PUT32>
+    95f0:	e8bd8070 	pop	{r4, r5, r6, pc}
+    95f4:	cccccccd 	.word	0xcccccccd
 
-00009670 <gpio_set_function>:
-    9670:	e350002f 	cmp	r0, #47, 0	; 0x2f
-    9674:	1350001f 	cmpne	r0, #31, 0
-    9678:	812fff1e 	bxhi	lr
-    967c:	e92d4070 	push	{r4, r5, r6, lr}
-    9680:	e1a05001 	mov	r5, r1
-    9684:	e3510007 	cmp	r1, #7, 0
-    9688:	88bd8070 	pophi	{r4, r5, r6, pc}
-    968c:	e59f403c 	ldr	r4, [pc, #60]	; 96d0 <gpio_set_function+0x60>
-    9690:	e0843094 	umull	r3, r4, r4, r0
-    9694:	e1a041a4 	lsr	r4, r4, #3
-    9698:	e1a06104 	lsl	r6, r4, #2
-    969c:	e0844104 	add	r4, r4, r4, lsl #2
-    96a0:	e0404084 	sub	r4, r0, r4, lsl #1
-    96a4:	e2866202 	add	r6, r6, #536870912	; 0x20000000
-    96a8:	e2866602 	add	r6, r6, #2097152	; 0x200000
-    96ac:	e1a00006 	mov	r0, r6
-    96b0:	ebfffa5d 	bl	802c <GET32>
-    96b4:	e0844084 	add	r4, r4, r4, lsl #1
-    96b8:	e3a01007 	mov	r1, #7, 0
-    96bc:	e1c01411 	bic	r1, r0, r1, lsl r4
-    96c0:	e1811415 	orr	r1, r1, r5, lsl r4
-    96c4:	e1a00006 	mov	r0, r6
-    96c8:	ebfffa55 	bl	8024 <PUT32>
-    96cc:	e8bd8070 	pop	{r4, r5, r6, pc}
-    96d0:	cccccccd 	.word	0xcccccccd
+000095f8 <gpio_set_output>:
+    95f8:	e92d4010 	push	{r4, lr}
+    95fc:	e3a01001 	mov	r1, #1, 0
+    9600:	ebffffe2 	bl	9590 <gpio_set_function>
+    9604:	e8bd8010 	pop	{r4, pc}
 
-000096d4 <gpio_set_output>:
-    96d4:	e92d4010 	push	{r4, lr}
-    96d8:	e3a01001 	mov	r1, #1, 0
-    96dc:	ebffffe3 	bl	9670 <gpio_set_function>
-    96e0:	e8bd8010 	pop	{r4, pc}
+00009608 <gpio_set_on>:
+    9608:	e92d4010 	push	{r4, lr}
+    960c:	e350002f 	cmp	r0, #47, 0	; 0x2f
+    9610:	0a000006 	beq	9630 <gpio_set_on+0x28>
+    9614:	e350001f 	cmp	r0, #31, 0
+    9618:	88bd8010 	pophi	{r4, pc}
+    961c:	e3a01001 	mov	r1, #1, 0
+    9620:	e1a01011 	lsl	r1, r1, r0
+    9624:	e59f001c 	ldr	r0, [pc, #28]	; 9648 <gpio_set_on+0x40>
+    9628:	ebfffa7d 	bl	8024 <PUT32>
+    962c:	e8bd8010 	pop	{r4, pc}
+    9630:	e200001f 	and	r0, r0, #31, 0
+    9634:	e3a01001 	mov	r1, #1, 0
+    9638:	e1a01011 	lsl	r1, r1, r0
+    963c:	e59f0008 	ldr	r0, [pc, #8]	; 964c <gpio_set_on+0x44>
+    9640:	ebfffa77 	bl	8024 <PUT32>
+    9644:	e8bd8010 	pop	{r4, pc}
+    9648:	2020001c 	.word	0x2020001c
+    964c:	20200020 	.word	0x20200020
 
-000096e4 <gpio_set_input>:
-    96e4:	e92d4010 	push	{r4, lr}
-    96e8:	e3a01000 	mov	r1, #0, 0
-    96ec:	ebffffdf 	bl	9670 <gpio_set_function>
-    96f0:	e8bd8010 	pop	{r4, pc}
+00009650 <gpio_set_off>:
+    9650:	e92d4010 	push	{r4, lr}
+    9654:	e350002f 	cmp	r0, #47, 0	; 0x2f
+    9658:	0a000006 	beq	9678 <gpio_set_off+0x28>
+    965c:	e350001f 	cmp	r0, #31, 0
+    9660:	88bd8010 	pophi	{r4, pc}
+    9664:	e3a01001 	mov	r1, #1, 0
+    9668:	e1a01011 	lsl	r1, r1, r0
+    966c:	e59f001c 	ldr	r0, [pc, #28]	; 9690 <gpio_set_off+0x40>
+    9670:	ebfffa6b 	bl	8024 <PUT32>
+    9674:	e8bd8010 	pop	{r4, pc}
+    9678:	e200001f 	and	r0, r0, #31, 0
+    967c:	e3a01001 	mov	r1, #1, 0
+    9680:	e1a01011 	lsl	r1, r1, r0
+    9684:	e59f0008 	ldr	r0, [pc, #8]	; 9694 <gpio_set_off+0x44>
+    9688:	ebfffa65 	bl	8024 <PUT32>
+    968c:	e8bd8010 	pop	{r4, pc}
+    9690:	20200028 	.word	0x20200028
+    9694:	2020002c 	.word	0x2020002c
 
-000096f4 <putk>:
-    96f4:	e92d4010 	push	{r4, lr}
-    96f8:	e1a04000 	mov	r4, r0
-    96fc:	e5d40000 	ldrb	r0, [r4]
-    9700:	e3500000 	cmp	r0, #0, 0
-    9704:	0a000004 	beq	971c <putk+0x28>
-    9708:	e59f3014 	ldr	r3, [pc, #20]	; 9724 <putk+0x30>
-    970c:	e5933000 	ldr	r3, [r3]
-    9710:	e12fff33 	blx	r3
-    9714:	e2844001 	add	r4, r4, #1, 0
-    9718:	eafffff7 	b	96fc <putk+0x8>
-    971c:	e3a00001 	mov	r0, #1, 0
-    9720:	e8bd8010 	pop	{r4, pc}
-    9724:	00009eac 	.word	0x00009eac
+00009698 <gpio_set_input>:
+    9698:	e92d4010 	push	{r4, lr}
+    969c:	e3a01000 	mov	r1, #0, 0
+    96a0:	ebffffba 	bl	9590 <gpio_set_function>
+    96a4:	e8bd8010 	pop	{r4, pc}
 
-00009728 <reboot_callout>:
-    9728:	e12fff1e 	bx	lr
+000096a8 <gpio_write>:
+    96a8:	e92d4010 	push	{r4, lr}
+    96ac:	e3510000 	cmp	r1, #0, 0
+    96b0:	0a000001 	beq	96bc <gpio_write+0x14>
+    96b4:	ebffffd3 	bl	9608 <gpio_set_on>
+    96b8:	e8bd8010 	pop	{r4, pc}
+    96bc:	ebffffe3 	bl	9650 <gpio_set_off>
+    96c0:	e8bd8010 	pop	{r4, pc}
 
-0000972c <dev_barrier>:
-    972c:	ea000002 	b	973c <dsb>
+000096c4 <gpio_read>:
+    96c4:	e350001f 	cmp	r0, #31, 0
+    96c8:	8a000006 	bhi	96e8 <gpio_read+0x24>
+    96cc:	e92d4010 	push	{r4, lr}
+    96d0:	e1a04000 	mov	r4, r0
+    96d4:	e59f0014 	ldr	r0, [pc, #20]	; 96f0 <gpio_read+0x2c>
+    96d8:	ebfffa53 	bl	802c <GET32>
+    96dc:	e1a00430 	lsr	r0, r0, r4
+    96e0:	e2000001 	and	r0, r0, #1, 0
+    96e4:	e8bd8010 	pop	{r4, pc}
+    96e8:	e3e00000 	mvn	r0, #0, 0
+    96ec:	e12fff1e 	bx	lr
+    96f0:	20200034 	.word	0x20200034
 
-00009730 <dmb>:
-    9730:	e3a00000 	mov	r0, #0, 0
-    9734:	ee070fba 	mcr	15, 0, r0, cr7, cr10, {5}
-    9738:	e12fff1e 	bx	lr
-
-0000973c <dsb>:
-    973c:	ee070f9a 	mcr	15, 0, r0, cr7, cr10, {4}
-    9740:	e12fff1e 	bx	lr
-
-00009744 <rpi_wait>:
-    9744:	e12fff1e 	bx	lr
+000096f4 <using_staff_gpio>:
+    96f4:	e12fff1e 	bx	lr

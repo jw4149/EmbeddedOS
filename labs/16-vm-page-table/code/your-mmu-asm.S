@@ -37,30 +37,48 @@ MK_FN(get_cache_type)
 // void reset(void)
 // clear the dcache, icache, tlbs
 MK_FN(mmu_reset)
-    b staff_mmu_reset
-
-    asm_not_implemented()
+    @ b staff_mmu_reset
+    mov r2, #0
+    INV_TLB(r2)
+    INV_DCACHE(r2)
+    INV_ICACHE(r2)
+    @ FLUSH_BTB(r2)
+    DSB(r2)
+    PREFETCH_FLUSH(r2)
     bx lr
 
 // void cp15_domain_ctrl_wr(uint32_t dom_reg);
 //  need to do cp15 sync: flush_btb, dsb, prefetch flush
 MK_FN(cp15_domain_ctrl_wr)
-    b staff_cp15_domain_ctrl_wr
-
-    asm_not_implemented()
+    @ b staff_cp15_domain_ctrl_wr
+    mov r2, #0
+    DOMAIN_CTRL_WR(r0)
+    PREFETCH_FLUSH(r2)
     bx lr
 
 // void cp15_set_procid_ttbr0(uint32_t proc_and_asid, fld_t *pt);
 // sequence from b2-25
 MK_FN(cp15_set_procid_ttbr0)
-    b staff_cp15_set_procid_ttbr0
+    @ b staff_cp15_set_procid_ttbr0
 
-    asm_not_implemented()
+    mov r2, #0
+    ASID_SET(r2)
+    PREFETCH_FLUSH(r2)
+
+    TTBR_BASE_CTRL_WR(r2)
+    TTBR0_SET(r1)
+    TTBR1_SET(r2)
+    PREFETCH_FLUSH(r2)
+    FLUSH_BTB(r2)
+    PREFETCH_FLUSH(r2)
+
+    ASID_SET(r0)
+    PREFETCH_FLUSH(r2)
     bx lr
 
 // void mmu_disable_set_asm(cp15_ctrl_reg1_t c);
 MK_FN(mmu_disable_set_asm)
-    b staff_mmu_disable_set_asm
+    @ b staff_mmu_disable_set_asm
 
     @ note: this piece of code is mapped into the sample place in both
     @ MMU-enabled and MMU-disabled so BTB and Prefetch entries work identically
@@ -70,19 +88,52 @@ MK_FN(mmu_disable_set_asm)
     @ flush, but instructions could get fetched before we could disable,
     @ defeating the purpose.
 
-    asm_not_implemented()
+    mov r2, #0
+    CLEAN_INV_DCACHE(r2)
+    DSB(r2)
+    PREFETCH_FLUSH(r2)
+
+    CONTROL_REG1_WR(r0)
+    PREFETCH_FLUSH(r2)
+
+    INV_ICACHE(r2)
+    DSB(r2)
+    PREFETCH_FLUSH(r2)
+
+    FLUSH_BTB(r2)
+    PREFETCH_FLUSH(r2)
     bx lr
 
 // void mmu_enable_set_asm(cp15_ctrl_reg1_t c);
 MK_FN(mmu_enable_set_asm)
-    b staff_mmu_enable_set_asm
+    @ b staff_mmu_enable_set_asm
+    mov r2, #0
 
-    asm_not_implemented()
+    CONTROL_REG1_RD(r3)
+    bic r3, r3, #0x1000
+    CONTROL_REG1_WR(r3)
+    PREFETCH_FLUSH(r2)
+
+    INV_ICACHE(r2)
+    DSB(r2)
+
+    CONTROL_REG1_WR(r0)
+    PREFETCH_FLUSH(r2)
+
+    FLUSH_BTB(r2)
+    PREFETCH_FLUSH(r2)
     bx lr
 
+// B-23
 MK_FN(mmu_sync_pte_mods)
-    b staff_mmu_sync_pte_mods
-
-    asm_not_implemented()
+    @ b staff_mmu_sync_pte_mods
+    mov r2, #0
+    CLEAN_INV_DCACHE(r2)
+    INV_ICACHE(r2)
+    DSB(r2)
+    INV_TLB(r2)
+    FLUSH_BTB(r2)
+    DSB(r2)
+    PREFETCH_FLUSH(r2)
     bx lr
 

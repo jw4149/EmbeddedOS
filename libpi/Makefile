@@ -7,6 +7,7 @@
 STAFF_OBJS  +=  ./staff-objs/gpio.o
 #SRC = src/gpio.c
 SRC = src/uart.c
+SRC += src/i2c.c
 #SRC += src/gpio-int.c
 #SRC += ../labs/8-uart/2-uart/uart.c
 

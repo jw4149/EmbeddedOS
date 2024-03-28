@@ -1,0 +1,197 @@
+DEBUG:done with options: dev name=</dev/cu.usbserial-120>, pi-prog=<./tests-2.0/4-test-vm-cache-mgmt.bin>, trace=0
+opened tty port </dev/cu.usbserial-120>.
+DEBUG:my-install: tty-usb=</dev/cu.usbserial-120> program=<./tests-2.0/4-test-vm-cache-mgmt.bin>: about to boot
+TRACE:simple_boot: sending 28208 bytes, crc32=4a69fba7
+BOOT:waiting for a start
+DEBUG:PRINT_STRING:pi sent print: <UART - Jiayang>
+BOOT:bootloader: Done.
+------------------------------
+printing pte entry [index=512 = addr=0x100800]:
+HASH:	PTE crc:: hash=0xa0b5eb0e,nbytes=4
+	0b1000000000	= sec_base_addr
+	0x0x200
+	  --> va=0x20000000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b0	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=513 = addr=0x100804]:
+HASH:	PTE crc:: hash=0xf653f334,nbytes=4
+	0b1000000001	= sec_base_addr
+	0x0x201
+	  --> va=0x20100000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b0	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=514 = addr=0x100808]:
+HASH:	PTE crc:: hash=0xa753bc13,nbytes=4
+	0b1000000010	= sec_base_addr
+	0x0x202
+	  --> va=0x20200000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b0	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=0 = addr=0x100000]:
+HASH:	PTE crc:: hash=0x5fe59de2,nbytes=4
+	0b0	= sec_base_addr
+	  --> va=0x0
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b1	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=1 = addr=0x100004]:
+HASH:	PTE crc:: hash=0x10011b4e,nbytes=4
+	0b1	= sec_base_addr
+	  --> va=0x100000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b1	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=143 = addr=0x10023c]:
+HASH:	PTE crc:: hash=0x93505b9c,nbytes=4
+	0b10001111	= sec_base_addr
+	0x0x8f
+	  --> va=0x8f00000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b1	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=127 = addr=0x1001fc]:
+HASH:	PTE crc:: hash=0x66816268,nbytes=4
+	0b1111111	= sec_base_addr
+	0x0x7f
+	  --> va=0x7f00000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b1	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b0	= C
+	0b0	= B
+	0b10	= tag
+------------------------------
+printing pte entry [index=10 = addr=0x100028]:
+HASH:	PTE crc:: hash=0x6fa1da7c,nbytes=4
+	0b1010	= sec_base_addr
+	0x0xa
+	  --> va=0xa00000
+	          76543210 [digit position]
+	0b0	= nG
+	0b0	= S
+	0b0	= APX
+	0b1	= TEX
+	0b1	= AP
+	0b0	= IMP
+	0b1	= domain
+	0b0	= XN
+	0b1	= C
+	0b1	= B
+	0b10	= tag
+TRACE:notmain:******************************************************
+TRACE:notmain:1. test that the page table enabled dcaching correctly.
+tests-2.0/4-test-vm-cache-mgmt.c:18: first access: should see one miss:
+	cycles=434
+	dcache miss=1
+	instruction count=18
+tests-2.0/4-test-vm-cache-mgmt.c:35: should be cached: should see no misses:
+	cycles=420
+	dcache miss=0
+	dcache access=5
+TRACE:notmain:******************************************************
+TRACE:notmain:2. test that the page table enabled icaching correctly.
+tests-2.0/4-test-vm-cache-mgmt.c:140: testing miss on nop:
+	cycles=285
+	icache miss=0
+	instruction count=18
+tests-2.0/4-test-vm-cache-mgmt.c:62: first access: should see many icache misses:
+	cycles=2348
+	icache miss=33
+	instruction count=276
+TRACE:notmain:******************************************************
+TRACE:notmain:3. test that sync pte mods flushes the dcache.
+tests-2.0/4-test-vm-cache-mgmt.c:18: after pte mod: dcache should be flushed:
+	cycles=386
+	dcache miss=1
+	instruction count=18
+tests-2.0/4-test-vm-cache-mgmt.c:62: after pte mod: icache should be flushed:
+	cycles=2031
+	icache miss=33
+	instruction count=276
+TRACE:notmain:******************************************************
+TRACE:notmain:4. test that mmu_on/off flushes the dcache.
+tests-2.0/4-test-vm-cache-mgmt.c:18: after mmu on/off: dcache should be flushed:
+	cycles=341
+	dcache miss=1
+	instruction count=18
+tests-2.0/4-test-vm-cache-mgmt.c:62: after mmu on/off: icache should be flushed:
+	cycles=2031
+	icache miss=33
+	instruction count=276
+TRACE:notmain:******************************************************
+TRACE:notmain:5. about to test that disable dcache invalidates correctly
+TRACE:notmain:******************************************************
+TRACE:notmain:6. about to test sync_pte_mods invalides dcache correctly
+TRACE:notmain:SUCCESS!
+DONE!!!
+
+bootloader: pi exited.  cleaning up

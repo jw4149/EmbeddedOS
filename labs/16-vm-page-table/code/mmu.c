@@ -7,6 +7,10 @@
 #include "mmu.h"
 
 // given.
+void cp15_domain_ctrl_wr(uint32_t dom_reg);
+void mmu_reset(void);
+void mmu_enable_set_asm(cp15_ctrl_reg1_t c);
+void mmu_disable_set_asm(cp15_ctrl_reg1_t c);
 
 int mmu_is_enabled(void) {
     return cp15_ctrl_reg1_rd().MMU_enabled != 0;
@@ -24,7 +28,7 @@ void mmu_disable_set(cp15_ctrl_reg1_t c) {
     // record if dcache on.
     uint32_t cache_on_p = c.C_unified_enable;
 
-    staff_mmu_disable_set_asm(c);
+    mmu_disable_set_asm(c);
 
     // re-enable if it was on.
     if(cache_on_p) {
@@ -50,7 +54,7 @@ void mmu_disable(void) {
 // real work (you'll write this code next time).
 void mmu_enable_set(cp15_ctrl_reg1_t c) {
     assert(c.MMU_enabled);
-    staff_mmu_enable_set_asm(c);
+    mmu_enable_set_asm(c);
 }
 
 // enable mmu by flipping enable bit.
@@ -81,7 +85,7 @@ void mmu_init(void) {
     return;
 
     // reset the MMU state: you will implement next lab
-    staff_mmu_reset();
+    mmu_reset();
 
     // trivial: RMW the xp bit in control reg 1.
     // leave mmu disabled.
@@ -101,6 +105,8 @@ uint32_t domain_access_ctrl_get(void) {
 // b4-42
 // set domain access control register to <r>
 void domain_access_ctrl_set(uint32_t r) {
-    staff_domain_access_ctrl_set(r);
+    // staff_domain_access_ctrl_set(r);
+    // B4-42
+    cp15_domain_ctrl_wr(r);
     assert(domain_access_ctrl_get() == r);
 }

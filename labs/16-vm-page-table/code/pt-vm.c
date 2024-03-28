@@ -88,8 +88,8 @@ vm_map_sec(vm_pt_t *pt, uint32_t va, uint32_t pa, pin_t attr)
     pte->super = 0b0;
     pte->sec_base_addr = pa >> 20;
 
-    if(verbose_p)
-        vm_pte_print(pt,pte);
+    // if(verbose_p)
+    //     vm_pte_print(pt,pte);
     assert(pte);
     return pte;
 }

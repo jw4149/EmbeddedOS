@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "rpi-interrupts.h": "c",
+        "helper-macros.h": "c",
+        "cycle-count.h": "c"
+    }
+}

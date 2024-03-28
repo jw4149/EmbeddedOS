@@ -69,12 +69,12 @@ void notmain() {
 
     // address to copy at is at offset 2
     uint32_t addr = p[2];
-    assert(addr == 0x100000f0);
-
+    assert(addr == 0x90000);
+    memcpy((void *)addr, p, f->n_data);
     // jump to it using BRANCHTO.  make sure
     // you skip the header!  (see in hello-f.list
     // and memmap.fixed in 13-fat32/hello-fixed
-    unimplemented();
+    BRANCHTO(addr+16);
 
   printk("PASS: %s\n", __FILE__);
   clean_reboot();
